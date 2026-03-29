@@ -4,7 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>410 Odd Jobs LLC | Junk Removal & Hauling — Howard County, MD</title>
-  <meta name="description" content="Howard County's reliable junk removal, moving & hauling service. Furniture removal, estate cleanouts, appliances & more. Owner on every job. Call today!" />
+  <meta name="description" content="410 Odd Jobs LLC: Howard County's #1 junk removal, moving & hauling service. Serving Ellicott City, Columbia, Clarksville, Marriottsville & all MD. Owner on every job. Fast, reliable, same-day service. Call (410) 800-6074!" />
+  
+  <!-- Social Media Tags (Open Graph) -->
+  <meta property="og:title" content="410 Odd Jobs LLC | Junk Removal & Hauling — Howard County, MD" />
+  <meta property="og:description" content="Howard County's reliable junk removal, moving & hauling service. Furniture removal, estate cleanouts, appliances & more. Owner on every job." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="Website Work Images/NEW LOGO 2026 copy 2.png" />
+  
+  <!-- Twitter Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="410 Odd Jobs LLC | Junk Removal & Hauling" />
+  <meta name="twitter:description" content="Howard County's reliable junk removal, moving & hauling service." />
+  <meta name="twitter:image" content="Website Work Images/NEW LOGO 2026 copy 2.png" />
+
+  <!-- Schema.org Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "410 Odd Jobs LLC",
+    "image": "https://410oddjobs.com/Website%20Work%20Images/NEW%20LOGO%202026%20copy%202.png",
+    "@id": "https://410oddjobs.com",
+    "url": "https://410oddjobs.com",
+    "telephone": "+14108006074",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ellicott City",
+      "addressRegion": "MD",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 39.2673,
+      "longitude": -76.7983
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "20:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/people/410-Odd-Jobs-LLC/61577842138356/",
+      "https://www.instagram.com/410oddjobs/"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -89,6 +145,26 @@
       display: flex;
       align-items: center;
       gap: clamp(0.75rem, 2vw, 1.5rem);
+    }
+
+    .header-social {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .header-social a {
+      color: var(--muted);
+      transition: color 0.3s, transform 0.2s;
+      display: inline-flex;
+    }
+    .header-social a:hover {
+      color: var(--red);
+      transform: translateY(-2px);
+    }
+    .header-social svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     .header-phone {
@@ -988,6 +1064,41 @@
       margin-top: 0.75rem;
     }
 
+    /* ─── FAQ ────────────────────────────────────────────── */
+    #faq { background: var(--black-2); padding: clamp(3rem, 7vw, 6rem) 0; }
+    .faq-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.25rem;
+    }
+    .faq-item {
+      background: var(--black-3);
+      border: 1px solid var(--border);
+      padding: clamp(1.25rem, 3vw, 2rem);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .faq-item:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px oklch(0% 0 0 / 0.2);
+    }
+    .faq-item h4 {
+      font-family: var(--font-head);
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--off-white);
+      letter-spacing: 0.02em;
+    }
+    .faq-item p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
       background: oklch(10% 0.04 258);
@@ -1008,6 +1119,24 @@
       font-weight: 300;
       color: var(--muted);
       line-height: 1.7;
+    }
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .footer-social a {
+      color: var(--muted);
+      transition: color 0.3s;
+      display: inline-flex;
+    }
+    .footer-social a:hover {
+      color: var(--red);
+    }
+    .footer-social svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
     }
     .footer-col h5 {
       font-family: var(--font-head);
@@ -1167,6 +1296,14 @@
   <div class="header-inner">
     <a href="#" class="logo">410 <span>ODD</span> JOBS</a>
     <div class="header-right">
+      <div class="header-social">
+        <a href="https://www.facebook.com/people/410-Odd-Jobs-LLC/61577842138356/?ref=NONE_xav_ig_profile_page_web#" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7h-2.54v-2.9h2.54v-2.21c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/410oddjobs/" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+        </a>
+      </div>
       <button id="theme-toggle" class="btn btn-outline" style="padding: 0.5rem; border: none; font-size: 1.25rem;" aria-label="Toggle Theme">🌓</button>
       <a href="tel:4108006074" class="header-phone">
         <span class="icon">📞</span>
@@ -1182,6 +1319,7 @@
       <a href="#work" class="nav-link">Our Work</a>
       <a href="#about" class="nav-link">About</a>
       <a href="#reviews" class="nav-link">Reviews</a>
+      <a href="#faq" class="nav-link">FAQ</a>
       <a href="#areas" class="nav-link">Service Areas</a>
       <a href="#contact" class="nav-link">Contact</a>
     </div>
@@ -1227,11 +1365,14 @@
         <h3>Junk Removal</h3>
         <p>We load, haul, and responsibly dispose of your unwanted items. Sit back while we do the heavy lifting.</p>
         <ul class="service-list">
-          <li>Furniture & appliances</li>
-          <li>Yard waste & debris</li>
-          <li>Construction materials</li>
-          <li>Electronics & scrap</li>
-          <li>Donation drop-offs</li>
+          <li>Furniture (Sofas, Mattresses, Bed Frames)</li>
+          <li>Appliances (Fridges, Stoves, Washers)</li>
+          <li>Yard Waste & Debris</li>
+          <li>Construction Materials (Wood, Drywall)</li>
+          <li>Electronics & Scrap Metal</li>
+          <li>Attic & Basement Cleanouts</li>
+          <li>Garage & Shed Clearances</li>
+          <li>Hot Tub Removal</li>
         </ul>
       </div>
       <div class="service-card reveal reveal-delay-1">
@@ -1466,6 +1607,40 @@
 </section>
 
 
+<!-- FAQ SECTION -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label reveal">Common Questions</p>
+      <h2 class="section-title reveal reveal-delay-1">Got Questions? We Have Answers.</h2>
+      <p class="section-sub reveal reveal-delay-2">Everything you need to know about our Howard County junk removal and hauling services.</p>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <h4>How do you price your services?</h4>
+        <p>Our pricing is primarily based on the volume of space your items take up in our truck. For specialized jobs like moving or heavy hauling, we offer flat-rate quotes so you know exactly what to expect. No hidden fees, ever.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Are you insured?</h4>
+        <p>Yes, 410 Odd Jobs LLC is fully insured. We take the safety of your property and our team very seriously, giving you peace of mind from start to finish.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Do you take hazardous materials?</h4>
+        <p>We cannot take hazardous materials such as paints, chemicals, tires, or lithium batteries. If you're unsure about a specific item, just give us a call and we'll let you know!</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Do you offer same-day service?</h4>
+        <p>We often do! Depending on our schedule in Howard County, we can frequently accommodate same-day or next-day requests. Call (410) 800-6074 for immediate availability.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Where does the junk go?</h4>
+        <p>We prioritize responsible disposal. Items in good condition are often donated to local charities, and we recycle as much as possible before heading to the landfill.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICE AREAS -->
 <section id="areas">
   <div class="container">
@@ -1492,6 +1667,10 @@
           <div class="city">North Laurel</div>
           <div class="city">Elkridge</div>
           <div class="city">Dayton</div>
+          <div class="city">Glenwood</div>
+          <div class="city">Glenelg</div>
+          <div class="city">Highland</div>
+          <div class="city">West Friendship</div>
         </div>
       </div>
     </div>
@@ -1578,6 +1757,14 @@
     <div class="footer-brand">
       <a href="#home" class="logo">410 <span>ODD</span> JOBS</a>
       <p>Howard County's reliable junk removal, moving & hauling service. Owner on every job.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/people/410-Odd-Jobs-LLC/61577842138356/?ref=NONE_xav_ig_profile_page_web#" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M12 2.04c-5.5 0-10 4.49-10 10.02 0 5 3.66 9.15 8.44 9.9v-7h-2.54v-2.9h2.54v-2.21c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.45 2.9h-2.33v7a10 10 10 0 0 0 8.44-9.9c0-5.53-4.5-10.02-10-10.02z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/410oddjobs/" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="footer-col">
       <h5>Services</h5>
