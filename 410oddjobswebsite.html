@@ -1133,19 +1133,30 @@
     }
 
     @media (max-width: 640px) {
+      .header-inner { height: 60px; }
+      .logo { font-size: 1.1rem; }
+      #theme-toggle { font-size: 1.1rem; padding: 0.4rem; }
+      
       .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
+        grid-template-columns: 1fr; /* Single column for best photo visibility */
+        gap: 1rem;
       }
-      .gallery-item:first-child { grid-row: span 1; }
+      .gallery-item { aspect-ratio: 1 / 1; } /* Square on mobile for punchier look */
+      
+      .hero h1 { font-size: 3.2rem; }
+      .hero-content { padding: 4rem 1.5rem; }
+      
       .why-pillars { grid-template-columns: 1fr; }
-      .pillar { border-right: none; }
+      .pillar { border-right: none; padding: 1.5rem; }
       .pillar:nth-child(n+3) { border-bottom: 1px solid var(--border); }
       .pillar:last-child { border-bottom: none; }
+      
       .form-row { grid-template-columns: 1fr; }
-      .footer-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
       .header-phone { display: none; }
-      .about-values { flex-wrap: wrap; gap: 1.25rem; }
+      .site-nav { display: none; } /* Simplified mobile UX: focus on the floating CTA */
+      .about-values { flex-wrap: wrap; gap: 1.25rem; justify-content: space-between; }
+      .about-value { flex: 1 1 40%; }
     }
   </style>
 </head>
