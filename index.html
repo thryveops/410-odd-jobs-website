@@ -1717,7 +1717,12 @@
         <h3 class="form-title">Get Your Free Quote</h3>
         <p class="form-subtitle">No commitment. Hear the price first.</p>
 
-        <form id="quote-form" action="https://formspree.io/f/410oddjobs@gmail.com" method="POST">
+        <form id="quote-form" action="https://formsubmit.co/410oddjobs@gmail.com" method="POST">
+          <!-- FormSubmit Configuration -->
+          <input type="hidden" name="_subject" value="New Quote Request - 410 Odd Jobs">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://410oddjobs.com/index.html?status=success">
+          
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
@@ -1848,42 +1853,25 @@
   }
 
   // Form submission handler
-  document.getElementById('quote-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const form = this;
-    const btn = form.querySelector('.btn-submit');
-    const originalBtnText = btn.textContent;
-    
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
+  document.getElementById('quote-form').addEventListener('submit', function() {
+    this.querySelector('.btn-submit').textContent = 'Sending...';
+  });
 
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
+  // Check for success status from URL
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'success') {
+      const btn = document.querySelector('.btn-submit');
+      if (btn) {
         btn.textContent = '✓ Request Sent!';
         btn.style.background = 'oklch(45% 0.18 150)';
-        form.reset();
-      } else {
-        response.json().then(data => {
-          if (Object.hasOwn(data, 'errors')) {
-            alert(data["errors"].map(error => error["message"]).join(", "));
-          } else {
-            alert("Oops! There was a problem submitting your form");
-          }
-          btn.textContent = originalBtnText;
-          btn.disabled = false;
-        })
+        // Scroll to the contact form to show the success message
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
       }
-    }).catch(error => {
-      alert("Oops! There was a problem submitting your form");
-      btn.textContent = originalBtnText;
-      btn.disabled = false;
-    });
+    }
   });
 
   // Smooth scroll for anchor links (offset accounts for 2-row header)
