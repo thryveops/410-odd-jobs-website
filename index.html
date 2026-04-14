@@ -1664,7 +1664,7 @@
       </div>
       <div class="faq-item reveal">
         <h4>Do you take hazardous materials?</h4>
-        <p>We generally cannot take hazardous materials (paints, chemicals, tires, batteries). However, requirements can vary by date and material—please reach out for specific specifications.</p>
+        <p>While we no longer remove hazardous materials ourselves, Howard County provides residential drop-offs every Saturday morning from April through late summer. Don't let that stop you from reaching out, though! Many items aren't actually hazardous, and we can still clear out the rest of your junk. Contact us to discuss your project, and we'll take care of everything else.</p>
       </div>
       <div class="faq-item reveal">
         <h4>Do you offer same-day service?</h4>
@@ -1777,11 +1777,34 @@
               <option value="other">Other / Not Sure</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="date">When Do You Need It?</label>
-            <input type="date" id="date" name="date" />
-          </div>
-          <div class="form-group">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" list="city-options" placeholder="Columbia" required />
+              <datalist id="city-options">
+                <option value="Ellicott City"></option>
+                <option value="Columbia"></option>
+                <option value="Clarksville"></option>
+                <option value="Marriottsville"></option>
+                <option value="Woodstock"></option>
+                <option value="Fulton"></option>
+                <option value="Jessup"></option>
+                <option value="Savage"></option>
+                <option value="Laurel"></option>
+                <option value="North Laurel"></option>
+                <option value="Elkridge"></option>
+                <option value="Dayton"></option>
+                <option value="Glenwood"></option>
+                <option value="Glenelg"></option>
+                <option value="Highland"></option>
+                <option value="West Friendship"></option>
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label for="date">When Do You Need It?</label>
+              <input type="date" id="date" name="date" />
+            </div>
+          </div>          <div class="form-group">
             <label for="description">Briefly Describe the Job</label>
             <textarea id="description" name="description" placeholder="E.g. 3 old couches, a dresser, and some yard debris from the backyard..."></textarea>
           </div>
