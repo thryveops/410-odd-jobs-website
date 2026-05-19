@@ -1740,11 +1740,14 @@
         <h3 class="form-title">Get Your Free Quote</h3>
         <p class="form-subtitle">No commitment. Hear the price first.</p>
 
-        <form id="quote-form" action="https://formsubmit.co/410oddjobs@gmail.com" method="POST">
-          <!-- FormSubmit Configuration -->
-          <input type="hidden" name="_subject" value="New Quote Request - 410 Odd Jobs">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://410oddjobs.com/index.html?status=success">
+        <form id="quote-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms Configuration -->
+          <input type="hidden" name="access_key" value="d531d23f-b531-4387-889e-d30c6e64b251">
+          <input type="hidden" name="subject" value="New Quote Request - 410 Odd Jobs">
+          <input type="hidden" name="from_name" value="410 Odd Jobs Website">
+          <input type="hidden" name="redirect" value="https://410oddjobs.com/index.html?status=success">
+          <!-- Honeypot spam protection -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           
           <div class="form-row">
             <div class="form-group">
