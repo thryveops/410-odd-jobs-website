@@ -587,16 +587,52 @@
     /* ─── GALLERY ────────────────────────────────────────── */
     #work { background: var(--black-2); }
 
+    /* ─── GALLERY TABS ───────────────────────────────────── */
+    .gallery-tabs {
+      display: flex;
+      margin-bottom: 2.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    .gallery-tab {
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      padding: 0.85rem 2rem;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .gallery-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .gallery-tab.active { color: var(--off-white); }
+    .gallery-tab.active::after { transform: scaleX(1); }
+    .gallery-tab:hover:not(.active) { color: oklch(75% 0.02 258); }
+    .gallery-hidden { display: none !important; }
+
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 960px) {
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 640px) {
+    @media (max-width: 600px) {
       .gallery-grid { grid-template-columns: 1fr; }
     }
 
@@ -615,17 +651,21 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center;
+      object-position: center top;
       display: block;
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .gallery-item:hover img { transform: scale(1.05); }
 
-    .gallery-item.hidden {
-      display: none;
+    #panel-ba .gallery-item {
+      aspect-ratio: 1 / 2;
     }
+    #panel-ba .gallery-item img {
+      object-position: center center;
+    }
+    .gallery-extra-hidden { display: none !important; }
     .gallery-footer {
-      margin-top: 3rem;
+      margin-top: 2rem;
       display: flex;
       justify-content: center;
     }
@@ -1456,78 +1496,101 @@
       <h2 class="section-title reveal reveal-delay-1">See It For Yourself</h2>
     </div>
 
-    <div class="gallery-grid" id="gallery-grid">
-      <!-- MAIN FEATURED (TOP 4) -->
-      <div class="gallery-item reveal">
-        <img src="assets/images/bedroom-cleanout-ba.jpg" alt="410 Odd Jobs team member loading furniture into the truck" loading="lazy">
-        <div class="gallery-label">Moving In Action</div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-1">
-        <img src="assets/images/storage-room-ba.jpg" alt="Before and after office storage room cleanout" loading="lazy">
-        <div class="gallery-label">Bedroom Cleanout</div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2">
-        <img src="assets/images/warehouse-cleanout-ba.jpg" alt="Before and after warehouse hallway cleanout" loading="lazy">
-        <div class="gallery-label">Basement Wrapped</div>
-      </div>
-      <div class="gallery-item reveal reveal-delay-3">
-        <img src="assets/images/moving-action.jpg" alt="Professional backyard yard waste and debris removal" loading="lazy">
-        <div class="gallery-label">Yard Debris</div>
-      </div>
+    <div class="gallery-tabs reveal">
+      <button class="gallery-tab active" data-tab="team">The Team</button>
+      <button class="gallery-tab" data-tab="ba">Before &amp; After</button>
+    </div>
 
-      <!-- SECONDARY WORK (HIDDEN BY DEFAULT) -->
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/yard-debris-ba.jpg" alt="Ahmad standing by a 410 Odd Jobs truck filled with yard waste" loading="lazy">
-        <div class="gallery-label">Ahmad in Action</div>
+    <!-- Team Panel -->
+    <div class="gallery-panel" id="panel-team">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="assets/images/team-ahmad-couch.jpg" alt="Ahmad with a couch ready for removal" loading="lazy">
+          <div class="gallery-label">Couch Removal</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/team-two-moving-truck-1.jpeg" alt="410 Odd Jobs team at moving truck" loading="lazy">
+          <div class="gallery-label">Full Team Move</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/team-two-moving-truck-2.jpg" alt="410 Odd Jobs crew loading moving truck" loading="lazy">
+          <div class="gallery-label">Moving Day</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/team-ahmad-truck-1.jpeg" alt="Ahmad next to truck with wrapped furniture" loading="lazy">
+          <div class="gallery-label">Furniture Haul</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/team-ahmad-flowers.jpg" alt="Ahmad on the job with truck loaded" loading="lazy">
+          <div class="gallery-label">On the Job</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/team-ahmad-boxtruck-1.jpeg" alt="Ahmad in front of loaded box truck" loading="lazy">
+          <div class="gallery-label">Loaded &amp; Ready</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/team-crew-driveway.jpeg" alt="Ahmad loading truck in customer driveway" loading="lazy">
+          <div class="gallery-label">Loading Up</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/team-ahmad-furniture-truck.jpg" alt="Ahmad with fully loaded box truck" loading="lazy">
+          <div class="gallery-label">Hauling Out</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/team-ahmad-field.jpeg" alt="Ahmad next to truck loaded with debris" loading="lazy">
+          <div class="gallery-label">Debris Removal</div>
+        </div>
       </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/furniture-loading-truck.jpg" alt="Large commercial space being cleared out by our professional team" loading="lazy">
-        <div class="gallery-label">Warehouse Cleanout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/truck-bed-view.jpg" alt="Clean and organized storage area after junk removal" loading="lazy">
-        <div class="gallery-label">Storage Cleanout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/estate-living-room-cleanout.jpg" alt="Before and after estate living room cleanout" loading="lazy">
-        <div class="gallery-label">Estate Cleanout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/garage-cleanout.jpg" alt="Before and after garage cleanout" loading="lazy">
-        <div class="gallery-label">Garage Cleanout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/basement-cleanout.jpg" alt="Before and after basement cleanout" loading="lazy">
-        <div class="gallery-label">Basement Cleanout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/team-moving-truck.jpeg" alt="410 Odd Jobs team loading moving truck with ramp" loading="lazy">
-        <div class="gallery-label">Full Team Move</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/furniture-loading.jpeg" alt="Ahmad loading furniture into truck" loading="lazy">
-        <div class="gallery-label">Furniture Loading</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/construction-debris-cleanup.jpg" alt="Construction debris cleanup" loading="lazy">
-        <div class="gallery-label">Bedroom Clearout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/home-furniture-removal.jpg" alt="Home furniture removal" loading="lazy">
-        <div class="gallery-label">Efficient Hauling</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/yard-waste-removal.jpg" alt="Before and after bedroom junk removal and cleanout" loading="lazy">
-        <div class="gallery-label">Bedroom Cleanout</div>
-      </div>
-      <div class="gallery-item hidden reveal">
-        <img src="assets/images/estate-cleanout-1.jpg" alt="Overhead view of a neatly packed and full hauling truck" loading="lazy">
-        <div class="gallery-label">Efficient Hauling</div>
+      <div class="gallery-footer">
+        <button class="btn btn-outline btn-lg gallery-show-btn">Show All →</button>
       </div>
     </div>
-    <div class="gallery-footer reveal">
-      <button id="view-all-btn" class="btn btn-outline btn-lg">View All Work →</button>
+
+    <!-- Before & After Panel -->
+    <div class="gallery-panel gallery-hidden" id="panel-ba">
+      <div class="gallery-grid" id="gallery-ba">
+        <div class="gallery-item">
+          <img src="assets/images/estate-living-room-cleanout.jpg" alt="Before and after estate living room cleanout" loading="lazy">
+          <div class="gallery-label">Estate Cleanout</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/ba-patio-2.jpeg" alt="Before and after backyard patio cleanup" loading="lazy">
+          <div class="gallery-label">Backyard Cleanup</div>
+        </div>
+        <div class="gallery-item">
+          <img src="assets/images/ba-yard-swingset.jpg" alt="Before and after swing set removal" loading="lazy">
+          <div class="gallery-label">Yard Clearout</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/ba-bedroom-dresser.jpg" alt="Before and after bedroom dresser removal" loading="lazy">
+          <div class="gallery-label">Bedroom Removal</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/ba-bedroom-furniture.jpg" alt="Before and after bedroom furniture removal" loading="lazy">
+          <div class="gallery-label">Bedroom Cleanout</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/storage-room-ba.jpg" alt="Before and after storage room cleanout" loading="lazy">
+          <div class="gallery-label">Storage Cleanout</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/garage-cleanout.jpg" alt="Before and after garage cleanout" loading="lazy">
+          <div class="gallery-label">Garage Cleanout</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/basement-cleanout.jpg" alt="Before and after basement cleanout" loading="lazy">
+          <div class="gallery-label">Basement Cleanout</div>
+        </div>
+        <div class="gallery-item gallery-extra gallery-extra-hidden">
+          <img src="assets/images/ba-patio-1.jpeg" alt="Before and after patio cleanout" loading="lazy">
+          <div class="gallery-label">Patio Cleanout</div>
+        </div>
+      </div>
+      <div class="gallery-footer">
+        <button class="btn btn-outline btn-lg gallery-show-btn">Show All →</button>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1610,8 +1673,8 @@
     </div>
 
     <div class="reviews-cta reveal">
-      <a href="reviews.html" class="btn btn-outline btn-lg">See All 40 Reviews →</a>
-      <p class="reviews-cta-note">Reviews from Google, Facebook, Nextdoor & Thumbtack</p>
+      <a href="reviews.html" class="btn btn-outline btn-lg">See All 39 Reviews →</a>
+      <p class="reviews-cta-note">Reviews from Google, Facebook & Nextdoor</p>
     </div>
   </div>
 </section>
@@ -1888,18 +1951,44 @@
     });
   }
 
-  // Gallery Toggle Logic
-  const viewAllBtn = document.getElementById('view-all-btn');
-  const hiddenItems = document.querySelectorAll('.gallery-item.hidden');
-  if (viewAllBtn) {
-    viewAllBtn.addEventListener('click', () => {
-      hiddenItems.forEach(item => {
-        item.classList.remove('hidden');
-        item.classList.add('visible');
+  // Gallery Tab + Show All Logic
+  const galleryTabs = document.querySelectorAll('.gallery-tab');
+  const panelTeam = document.getElementById('panel-team');
+  const panelBA = document.getElementById('panel-ba');
+
+  function resetPanel(panel) {
+    panel.querySelectorAll('.gallery-extra').forEach(item => item.classList.add('gallery-extra-hidden'));
+    const footer = panel.querySelector('.gallery-footer');
+    if (footer) footer.style.display = 'flex';
+  }
+
+  if (galleryTabs.length) {
+    galleryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        galleryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        if (tab.dataset.tab === 'team') {
+          panelTeam.classList.remove('gallery-hidden');
+          panelBA.classList.add('gallery-hidden');
+          resetPanel(panelBA);
+        } else {
+          panelTeam.classList.add('gallery-hidden');
+          panelBA.classList.remove('gallery-hidden');
+          resetPanel(panelTeam);
+        }
       });
-      viewAllBtn.style.display = 'none';
     });
   }
+
+  document.querySelectorAll('.gallery-show-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = btn.closest('.gallery-panel');
+      panel.querySelectorAll('.gallery-extra').forEach(item => {
+        item.classList.remove('gallery-extra-hidden');
+      });
+      btn.closest('.gallery-footer').style.display = 'none';
+    });
+  });
 
   // Form submission handler
   document.getElementById('quote-form').addEventListener('submit', function() {
