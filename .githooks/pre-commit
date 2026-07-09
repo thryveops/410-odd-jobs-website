@@ -1,0 +1,12 @@
+#!/bin/sh
+# Blocks a commit when site content contradicts itself.
+# Bypass with `git commit --no-verify` only if you know why.
+#
+# This hook cannot tell whether a caption names the right person.
+# See docs/CONTENT-CHECKLIST.md before committing image or review changes.
+
+if ! python3 "$(git rev-parse --show-toplevel)/scripts/verify-content.py"; then
+    echo ""
+    echo "Commit blocked. Fix the problems above, or re-run with --no-verify."
+    exit 1
+fi
