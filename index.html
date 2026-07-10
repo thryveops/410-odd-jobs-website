@@ -2016,6 +2016,51 @@
     });
   });
 
+  // Warm the cache for gallery images the browser will not fetch on its own.
+  // A lazy <img> inside a display:none element is never requested, so both the
+  // "Show All" extras and the whole inactive tab would otherwise download only
+  // once clicked — several MB at once, while the user waits.
+  const workSection = document.getElementById('work');
+  if (workSection && 'IntersectionObserver' in window) {
+    const prefetchGallery = () => {
+      const sources = [];
+      // Extras in the visible tab are wanted first; the inactive tab can follow.
+      document.querySelectorAll('.gallery-panel').forEach(panel => {
+        const inactive = panel.classList.contains('gallery-hidden');
+        panel.querySelectorAll('.gallery-item img').forEach(img => {
+          if (img.complete && img.naturalWidth) return;
+          sources.push({ src: img.currentSrc || img.src, inactive });
+        });
+      });
+      sources.sort((a, b) => a.inactive - b.inactive);
+
+      let i = 0;
+      const next = () => {
+        if (i >= sources.length) return;
+        const loader = new Image();
+        loader.fetchPriority = 'low';
+        loader.decoding = 'async';
+        // Chain rather than fire all at once, so prefetching never competes
+        // with whatever the user is actually looking at.
+        loader.onload = loader.onerror = next;
+        loader.src = sources[i++].src;
+      };
+      const lanes = Math.min(3, sources.length);
+      for (let lane = 0; lane < lanes; lane++) next();
+    };
+
+    const io = new IntersectionObserver((entries, observer) => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      observer.disconnect();
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(prefetchGallery, { timeout: 2000 });
+      } else {
+        setTimeout(prefetchGallery, 200);
+      }
+    }, { rootMargin: '400px 0px' });
+    io.observe(workSection);
+  }
+
   // Form submission handler
   document.getElementById('quote-form').addEventListener('submit', function() {
     this.querySelector('.btn-submit').textContent = 'Sending...';
