@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Junk Removal Quote | Howard County, MD | 410 Odd Jobs LLC</title>
+  <meta name="description" content="Get a free same-day junk removal quote in Howard County, MD. Furniture, appliances, estate cleanouts & hauling. Call (443) 518-6074 or fill out the form — we respond within the hour." />
+
+  <!-- Paid-traffic landing page: kept out of the organic index so it does not
+       compete with the homepage for the same junk-removal queries. -->
+  <meta name="robots" content="noindex, follow" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: oklch(50% 0.27 25);
+      --red-dark: oklch(40% 0.25 25);
+      --red-light: oklch(62% 0.25 25);
+      --blue: oklch(42% 0.17 258);
+      --blue-light: oklch(52% 0.17 258);
+      --black: oklch(15% 0.04 258);
+      --black-2: oklch(19% 0.045 258);
+      --black-3: oklch(23% 0.05 258);
+      --off-white: oklch(97% 0.005 258);
+      --muted: oklch(60% 0.035 258);
+      --border: oklch(27% 0.055 258);
+      --green: oklch(70% 0.16 150);
+      --font-head: 'Oswald', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--off-white);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { width: min(1160px, 92%); margin: 0 auto; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
+      font-family: var(--font-head); font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none; border: none;
+      cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-light); transform: translateY(-1px); }
+
+    /* ─── HEADER ─────────────────────────────────────────── */
+    .lp-header {
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0;
+    }
+    .lp-header .container {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .lp-brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .lp-brand img {
+      width: 44px; height: 44px; border-radius: 8px; background: #fff; padding: 3px;
+    }
+    .lp-brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+    .lp-brand-name {
+      font-family: var(--font-head); font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.03em; color: var(--off-white); text-transform: uppercase;
+    }
+    .lp-brand-sub { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+    .header-call {
+      font-family: var(--font-head); font-weight: 600; font-size: 1.15rem;
+      color: var(--off-white); text-decoration: none; letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 0.45rem;
+    }
+    .header-call:hover { color: var(--red-light); }
+    .header-call small {
+      display: block; font-family: var(--font-body); font-weight: 400;
+      font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .lp-hero {
+      padding: 2.6rem 0 3rem;
+      background:
+        radial-gradient(900px 420px at 12% -10%, oklch(28% 0.09 258 / 0.55), transparent 70%),
+        var(--black);
+    }
+    /* Desktop: headline and supporting proof stack in the left column while the
+       form card spans both rows on the right, so the card's height never leaves
+       a gap under the trust bar. */
+    .lp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      column-gap: 3rem;
+      align-items: start;
+    }
+    .lp-intro   { grid-column: 1; grid-row: 1; }
+    .lp-support { grid-column: 1; grid-row: 2; }
+    .form-card  { grid-column: 2; grid-row: 1 / span 2; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-head); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red-light); margin-bottom: 0.9rem;
+    }
+    .eyebrow::before {
+      content: ''; width: 26px; height: 2px; background: var(--red); display: block;
+    }
+
+    .lp-title {
+      font-family: var(--font-head); font-weight: 700;
+      font-size: clamp(2.1rem, 4.6vw, 3.4rem); line-height: 1.05;
+      letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .lp-title em { font-style: normal; color: var(--red-light); }
+    .lp-sub {
+      font-size: 1.06rem; color: var(--muted); max-width: 33ch; margin-bottom: 1.6rem;
+    }
+
+    .lp-points { list-style: none; display: grid; gap: 0.75rem; margin-bottom: 1.8rem; }
+    .lp-points li { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.98rem; }
+    .lp-points svg { flex: 0 0 auto; width: 21px; height: 21px; margin-top: 2px; color: var(--green); }
+    .lp-points strong { font-weight: 500; color: var(--off-white); }
+
+    .trust-bar {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      padding: 0.9rem 1.1rem; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--black-2); max-width: 30rem;
+    }
+    .trust-stars { color: #FFC107; font-size: 1.15rem; letter-spacing: 0.06em; }
+    .trust-text { font-size: 0.9rem; color: var(--muted); }
+    .trust-text strong { color: var(--off-white); font-weight: 600; }
+
+    /* ─── FORM CARD ──────────────────────────────────────── */
+    .form-card {
+      background: var(--black-2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.8rem;
+      box-shadow: 0 24px 60px -18px oklch(0% 0 0 / 0.75);
+    }
+    .form-card-title {
+      font-family: var(--font-head); font-weight: 700; font-size: 1.6rem;
+      text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.15;
+    }
+    .form-card-sub { color: var(--muted); font-size: 0.92rem; margin: 0.3rem 0 1.3rem; }
+
+    .form-group { margin-bottom: 0.95rem; }
+    .form-group label {
+      display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.75rem 0.85rem; font-family: var(--font-body);
+      font-size: 1rem; color: var(--off-white); background: var(--black-3);
+      border: 1px solid var(--border); border-radius: 8px; outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: oklch(48% 0.03 258); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--red); box-shadow: 0 0 0 3px oklch(50% 0.27 25 / 0.18);
+    }
+    .form-group select { appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a95a8' stroke-width='2.2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 18px;
+      padding-right: 2.4rem;
+    }
+    .form-group select option { background: var(--black-2); }
+    .form-group textarea { resize: vertical; min-height: 92px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+    .btn-submit {
+      width: 100%; padding: 0.95rem 1.25rem; font-size: 1rem;
+      border-radius: 9px; margin-top: 0.4rem;
+    }
+    .form-note {
+      text-align: center; font-size: 0.82rem; color: var(--muted); margin-top: 0.8rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .form-divider {
+      display: flex; align-items: center; gap: 0.8rem;
+      color: var(--muted); font-size: 0.78rem; letter-spacing: 0.1em;
+      text-transform: uppercase; margin: 1.2rem 0 0.9rem;
+    }
+    .form-divider::before, .form-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .call-alt {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 9px;
+      font-family: var(--font-head); font-weight: 600; font-size: 1.05rem;
+      letter-spacing: 0.04em; color: var(--off-white); text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .call-alt:hover { border-color: var(--red); color: var(--red-light); }
+
+    /* ─── PROOF STRIP ────────────────────────────────────── */
+    .proof { padding: 3rem 0; background: var(--black-2); border-top: 1px solid var(--border); }
+    .proof-title {
+      font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+      font-size: 1.5rem; text-align: center; margin-bottom: 1.8rem; letter-spacing: 0.01em;
+    }
+    .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .proof-card {
+      background: var(--black-3); border: 1px solid var(--border);
+      border-radius: 11px; padding: 1.3rem;
+    }
+    .proof-card .stars { color: #FFC107; font-size: 0.98rem; margin-bottom: 0.6rem; letter-spacing: 0.05em; }
+    .proof-card p { font-size: 0.93rem; color: var(--off-white); margin-bottom: 0.85rem; }
+    .proof-name { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+
+    .areas {
+      margin-top: 2.2rem; text-align: center; font-size: 0.9rem;
+      color: var(--muted); line-height: 1.9;
+    }
+    .areas strong {
+      display: block; font-family: var(--font-head); text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--off-white); font-size: 0.8rem; margin-bottom: 0.5rem;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    .lp-footer {
+      padding: 1.8rem 0 5.5rem; text-align: center;
+      font-size: 0.84rem; color: var(--muted); background: var(--black);
+    }
+    .lp-footer a { color: var(--muted); text-decoration: underline; }
+
+    /* ─── STICKY MOBILE CALL BAR ─────────────────────────── */
+    .sticky-call {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
+      background: var(--red); color: #fff; text-decoration: none;
+      font-family: var(--font-head); font-weight: 600; font-size: 1.1rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      align-items: center; justify-content: center; gap: 0.55rem;
+      padding: 0.95rem; box-shadow: 0 -6px 24px oklch(0% 0 0 / 0.45);
+    }
+
+    @media (max-width: 900px) {
+      /* Single column, and the form jumps above the supporting bullets so paid
+         traffic reaches it without scrolling past four list items. */
+      .lp-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 1.7rem; }
+      .lp-intro, .lp-support, .form-card { grid-column: 1; grid-row: auto; }
+      .lp-intro { order: 1; }
+      .form-card { order: 2; }
+      .lp-support { order: 3; }
+      .lp-sub { max-width: none; margin-bottom: 0; }
+      .lp-points { margin-bottom: 1.4rem; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .trust-bar { max-width: none; }
+      .header-call { font-size: 1.02rem; }
+      .header-call small { display: none; }
+      .sticky-call { display: flex; }
+    }
+    @media (max-width: 560px) {
+      .lp-hero { padding: 1.9rem 0 2.2rem; }
+      .form-card { padding: 1.35rem; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .lp-brand-sub { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="lp-header">
+  <div class="container">
+    <a href="/" class="lp-brand">
+      <img src="/assets/images/favicon-192.png" width="44" height="44" alt="410 Odd Jobs LLC" />
+      <span class="lp-brand-text">
+        <span class="lp-brand-name">410 Odd Jobs LLC</span>
+        <span class="lp-brand-sub">Junk Removal · Moving · Hauling</span>
+      </span>
+    </a>
+    <a href="tel:4435186074" class="header-call" data-call-location="header">
+      📞 <span>
+        (443) 518-6074
+        <small>Tap to call · Mon–Sat 8–6</small>
+      </span>
+    </a>
+  </div>
+</header>
+
+<section class="lp-hero">
+  <div class="container">
+    <div class="lp-grid">
+
+      <div class="lp-intro">
+        <span class="eyebrow">Howard County, MD</span>
+        <h1 class="lp-title">Junk Removal<br><em>Near You</em> — Same Day</h1>
+        <p class="lp-sub">We haul it, you relax. Tell us what needs to go and we'll send you a free, no-commitment price.</p>
+      </div>
+
+      <div class="lp-support">
+        <ul class="lp-points">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span><strong>Same-day &amp; next-day service</strong> — most jobs booked within 24 hours</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span><strong>Free quotes, no obligation</strong> — you hear the price before we lift a thing</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span><strong>We do all the lifting</strong> — furniture, appliances, garages, estate cleanouts</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <span><strong>Owner-led, locally operated</strong> — not a national franchise</span>
+          </li>
+        </ul>
+
+        <div class="trust-bar">
+          <span class="trust-stars">★★★★★</span>
+          <span class="trust-text"><strong>5.0 average</strong> across <strong><span data-review-count>46</span> verified reviews</strong> · <a href="/reviews.html" style="color:var(--red-light);text-decoration:none;">Read them →</a></span>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h2 class="form-card-title">Get Your Free Quote</h2>
+        <p class="form-card-sub">Takes 30 seconds. We reply within the hour during business hours.</p>
+
+        <form id="quote-form" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Web3Forms configuration -->
+          <input type="hidden" name="access_key" value="d531d23f-b531-4387-889e-d30c6e64b251">
+          <input type="hidden" name="subject" value="🔴 GOOGLE ADS LEAD - 410 Odd Jobs">
+          <input type="hidden" name="from_name" value="410 Odd Jobs — Ads Landing Page">
+          <input type="hidden" name="redirect" value="https://410oddjobs.com/thank-you/">
+
+          <!-- Ad attribution: populated by JS so the lead email says which
+               click/keyword produced it. See the script at the bottom. -->
+          <input type="hidden" name="lead_source" value="Google Ads Landing Page">
+          <input type="hidden" name="gclid" id="f-gclid" value="">
+          <input type="hidden" name="utm_source" id="f-utm-source" value="">
+          <input type="hidden" name="utm_medium" id="f-utm-medium" value="">
+          <input type="hidden" name="utm_campaign" id="f-utm-campaign" value="">
+          <input type="hidden" name="utm_term" id="f-utm-term" value="">
+          <input type="hidden" name="utm_content" id="f-utm-content" value="">
+
+          <!-- Honeypot spam protection -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="John Smith" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(410) 555-0123" autocomplete="tel" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service">What Do You Need Removed?</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service...</option>
+              <option value="junk-removal">Junk Removal</option>
+              <option value="furniture-appliances">Furniture / Appliance Removal</option>
+              <option value="estate-cleanout">Estate / Garage Cleanout</option>
+              <option value="moving">Moving</option>
+              <option value="hauling">Hauling</option>
+              <option value="other">Other / Not Sure</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" list="city-options" placeholder="Columbia" autocomplete="address-level2" required />
+              <datalist id="city-options">
+                <option value="Ellicott City"></option>
+                <option value="Columbia"></option>
+                <option value="Clarksville"></option>
+                <option value="Marriottsville"></option>
+                <option value="Woodstock"></option>
+                <option value="Fulton"></option>
+                <option value="Jessup"></option>
+                <option value="Savage"></option>
+                <option value="Laurel"></option>
+                <option value="North Laurel"></option>
+                <option value="Elkridge"></option>
+                <option value="Dayton"></option>
+                <option value="Glenwood"></option>
+                <option value="Glenelg"></option>
+                <option value="Highland"></option>
+                <option value="West Friendship"></option>
+              </datalist>
+            </div>
+            <div class="form-group">
+              <label for="date">When Do You Need It?</label>
+              <input type="date" id="date" name="date" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Briefly Describe the Job</label>
+            <textarea id="description" name="description" placeholder="E.g. 3 old couches, a dresser, and some yard debris from the backyard..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-red btn-submit">Get My Free Quote →</button>
+          <p class="form-note">🔒 No spam. We only use your info to send your quote.</p>
+
+          <div class="form-divider">or</div>
+          <a href="tel:4435186074" class="call-alt" data-call-location="form">📞 Call (443) 518-6074</a>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="container">
+    <h2 class="proof-title">What Howard County Says About Us</h2>
+    <div class="proof-grid">
+
+      <div class="proof-card">
+        <div class="stars">★★★★★</div>
+        <p>The person that came out was prompt, efficient, friendly, and made the process of removing our junk so smooth! I'll be recommending you all to my neighbors 😊</p>
+        <p class="proof-name">Genevieve Yaeger Deol · Google Review</p>
+      </div>
+
+      <div class="proof-card">
+        <div class="stars">★★★★★</div>
+        <p>AMAZING young men! Ahmad and Colin took care of hauling an old sofa from inside my house the very NEXT DAY after I reached out to them. Respectful, professional, and personable: a fantastic customer service-focused company! Thank you!!!</p>
+        <p class="proof-name">Marie Belen S. Fortuno · Google Review</p>
+      </div>
+
+      <div class="proof-card">
+        <div class="stars">★★★★★</div>
+        <p>excellent communication and customer service. i didn't have to lift a finger</p>
+        <p class="proof-name">Mike · Google Review</p>
+      </div>
+
+    </div>
+
+    <p class="areas">
+      <strong>Proudly Serving</strong>
+      Ellicott City · Columbia · Clarksville · Marriottsville · Woodstock · Fulton · Jessup · Savage<br>
+      Laurel · North Laurel · Elkridge · Dayton · Glenwood · Glenelg · Highland · West Friendship
+    </p>
+  </div>
+</section>
+
+<footer class="lp-footer">
+  <div class="container">
+    &copy; <span id="year">2026</span> 410 Odd Jobs LLC · Howard County, Maryland ·
+    <a href="tel:4435186074">(443) 518-6074</a> ·
+    <a href="/">Main Site</a>
+  </div>
+</footer>
+
+<a href="tel:4435186074" class="sticky-call" data-call-location="sticky">📞 Call For A Free Quote</a>
+
+<script>
+  // ─── Ad attribution ────────────────────────────────────────────────
+  // Copy the click identifiers Google appends to the landing-page URL into
+  // hidden form fields, so each lead email records which campaign/keyword
+  // produced it. Falls back silently when the page is visited directly.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var map = {
+      'gclid': 'f-gclid',
+      'utm_source': 'f-utm-source',
+      'utm_medium': 'f-utm-medium',
+      'utm_campaign': 'f-utm-campaign',
+      'utm_term': 'f-utm-term',
+      'utm_content': 'f-utm-content'
+    };
+    Object.keys(map).forEach(function (key) {
+      var value = params.get(key);
+      if (!value) return;
+      var field = document.getElementById(map[key]);
+      if (field) field.value = value;
+    });
+
+    // Persist the gclid for one hour so a lead still gets attributed if the
+    // visitor navigates away and comes back before submitting.
+    try {
+      var gclid = params.get('gclid');
+      if (gclid) {
+        localStorage.setItem('_410_gclid', JSON.stringify({ v: gclid, t: Date.now() }));
+      } else {
+        var saved = JSON.parse(localStorage.getItem('_410_gclid') || 'null');
+        if (saved && Date.now() - saved.t < 3600000) {
+          document.getElementById('f-gclid').value = saved.v;
+        }
+      }
+    } catch (e) { /* storage blocked — attribution is best-effort */ }
+  })();
+
+  // ─── Submit feedback ───────────────────────────────────────────────
+  document.getElementById('quote-form').addEventListener('submit', function () {
+    var btn = this.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

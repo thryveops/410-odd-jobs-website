@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Received — We'll Be In Touch Shortly | 410 Odd Jobs LLC</title>
+  <meta name="description" content="Thanks for reaching out to 410 Odd Jobs LLC. We've received your free quote request and will respond shortly." />
+
+  <!-- Conversion confirmation page — must never be indexed or it can be
+       landed on directly and inflate the conversion count. -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: oklch(50% 0.27 25);
+      --red-light: oklch(62% 0.25 25);
+      --black: oklch(15% 0.04 258);
+      --black-2: oklch(19% 0.045 258);
+      --black-3: oklch(23% 0.05 258);
+      --off-white: oklch(97% 0.005 258);
+      --muted: oklch(60% 0.035 258);
+      --border: oklch(27% 0.055 258);
+      --green: oklch(70% 0.16 150);
+      --font-head: 'Oswald', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background:
+        radial-gradient(900px 500px at 50% -10%, oklch(28% 0.09 258 / 0.6), transparent 70%),
+        var(--black);
+      color: var(--off-white);
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      padding: 3rem 1.25rem;
+    }
+    .card {
+      width: min(620px, 100%); text-align: center;
+      background: var(--black-2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 3rem 2.2rem;
+      box-shadow: 0 26px 70px -20px oklch(0% 0 0 / 0.8);
+    }
+
+    .check {
+      width: 78px; height: 78px; margin: 0 auto 1.5rem;
+      border-radius: 50%; background: oklch(70% 0.16 150 / 0.14);
+      border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      animation: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.3) both;
+    }
+    .check svg { width: 40px; height: 40px; color: var(--green); }
+    @keyframes pop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    h1 {
+      font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(1.85rem, 5vw, 2.6rem); line-height: 1.08;
+      letter-spacing: -0.005em; margin-bottom: 0.9rem;
+    }
+    h1 em { font-style: normal; color: var(--red-light); }
+    .lede { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.9rem; }
+    .lede strong { color: var(--off-white); font-weight: 600; }
+
+    .next {
+      text-align: left; background: var(--black-3); border: 1px solid var(--border);
+      border-radius: 11px; padding: 1.3rem 1.4rem; margin-bottom: 1.9rem;
+    }
+    .next h2 {
+      font-family: var(--font-head); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.85rem;
+    }
+    .next ol { list-style: none; counter-reset: step; display: grid; gap: 0.7rem; }
+    .next li {
+      counter-increment: step; display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .next li::before {
+      content: counter(step); flex: 0 0 auto;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--red); color: #fff;
+      font-family: var(--font-head); font-size: 0.8rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      font-family: var(--font-head); font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.2s ease; padding: 0.95rem 1.6rem; font-size: 1.02rem;
+      border-radius: 9px; width: 100%;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-light); transform: translateY(-1px); }
+
+    .urgent { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.7rem; }
+
+    .links {
+      margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid var(--border);
+      display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+    .links a { color: var(--muted); text-decoration: none; }
+    .links a:hover { color: var(--off-white); text-decoration: underline; }
+
+    footer {
+      text-align: center; padding: 1.4rem; font-size: 0.83rem; color: var(--muted);
+    }
+
+    @media (max-width: 520px) { .card { padding: 2.2rem 1.4rem; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <main class="card">
+    <div class="check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+
+    <h1>Request <em>Received</em></h1>
+    <p class="lede">Thanks for reaching out. Your quote request is in — we typically reply <strong>within the hour</strong> during business hours (Mon–Sat, 8am–6pm).</p>
+
+    <div class="next">
+      <h2>What Happens Next</h2>
+      <ol>
+        <li>We review the details you sent us.</li>
+        <li>We text or call you with a firm, no-obligation price.</li>
+        <li>If it works for you, we schedule the pickup — often same or next day.</li>
+      </ol>
+    </div>
+
+    <p class="urgent">Need it handled sooner? Call us directly.</p>
+    <a href="tel:4435186074" class="btn btn-red">📞 (443) 518-6074</a>
+
+    <div class="links">
+      <a href="/">← Back to Main Site</a>
+      <a href="/reviews.html">Read Our Reviews</a>
+      <a href="https://www.facebook.com/people/410-Odd-Jobs-LLC/61577842138356/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/410oddjobs/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  &copy; <span id="year">2026</span> 410 Odd Jobs LLC · Howard County, Maryland
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     GOOGLE ADS CONVERSION TRACKING
+
+     Fill in the two values below with the Conversion ID and Conversion Label
+     from the Google Ads account:
+
+       Google Ads → Goals → Conversions → Summary → (open the conversion
+       action) → "Tag setup" → "Use Google tag" → the snippet contains
+         gtag('event', 'conversion', {'send_to': 'AW-123456789/AbCdEfGhIj'})
+                                                  └── ID ──┘ └── LABEL ──┘
+
+     Until both are filled in, nothing loads and no request is made — the page
+     stays fast and no bad data is sent to the Ads account.
+     ══════════════════════════════════════════════════════════════════════ -->
+<script>
+  var ADS_CONVERSION_ID    = '';   // e.g. 'AW-123456789'
+  var ADS_CONVERSION_LABEL = '';   // e.g. 'AbCdEfGhIj'
+
+  if (ADS_CONVERSION_ID && ADS_CONVERSION_LABEL) {
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ADS_CONVERSION_ID;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', ADS_CONVERSION_ID);
+    gtag('event', 'conversion', {
+      'send_to': ADS_CONVERSION_ID + '/' + ADS_CONVERSION_LABEL
+    });
+  }
+</script>
+
+</body>
+</html>

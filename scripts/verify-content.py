@@ -22,6 +22,7 @@ from collections import Counter, defaultdict
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX = os.path.join(ROOT, "index.html")
 REVIEWS = os.path.join(ROOT, "reviews.html")
+QUOTE = os.path.join(ROOT, "quote", "index.html")
 IMAGES = os.path.join(ROOT, "assets", "images")
 
 PLATFORM_LOCATION = {
@@ -108,8 +109,13 @@ def check_reviews(index_html, reviews_html):
         (REVIEWS, rf"{total} verified reviews", "page subtitle"),
         (REVIEWS, rf"<strong>{total}</strong>", "count badge"),
         (INDEX, rf"See All {total} Reviews", "homepage CTA"),
+        # The Google Ads landing page repeats the count in its trust bar, so it
+        # drifts out of sync the same way the others do.
+        (QUOTE, rf"data-review-count>{total}<", "ads landing page trust bar"),
     ]
     for path, pattern, where in claims:
+        if not os.path.exists(path):
+            continue
         if not re.search(pattern, read(path)):
             fail(f"{where}: does not state the real review count ({total})")
 
