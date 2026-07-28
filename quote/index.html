@@ -341,8 +341,14 @@
         <form id="quote-form" action="https://api.web3forms.com/submit" method="POST">
           <!-- Web3Forms configuration -->
           <input type="hidden" name="access_key" value="d531d23f-b531-4387-889e-d30c6e64b251">
-          <input type="hidden" name="subject" value="🔴 GOOGLE ADS LEAD - 410 Odd Jobs">
-          <input type="hidden" name="from_name" value="410 Odd Jobs — Ads Landing Page">
+          <!-- Keep these two headers plain ASCII. The emoji + em dash that used to
+               live here are the only header-level difference from the main site
+               form, which delivers fine to the same inbox; they are the prime
+               suspect for iCloud silently dropping ad leads. Ad attribution rides
+               in the body via lead_source/gclid/utm_* below, where no spam filter
+               grades it — so nothing is lost by keeping the subject boring. -->
+          <input type="hidden" name="subject" value="New Quote Request (Google Ads) - 410 Odd Jobs">
+          <input type="hidden" name="from_name" value="410 Odd Jobs Ads Landing Page">
           <input type="hidden" name="redirect" value="https://410oddjobs.com/thank-you/">
 
           <!-- Ad attribution: populated by JS so the lead email says which
