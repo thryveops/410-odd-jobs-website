@@ -8,6 +8,44 @@
   
   <link rel="canonical" href="https://410oddjobs.com/" />
 
+  <!-- Google tag (gtag.js) — Google Ads conversion tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18239637427"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18239637427');
+  </script>
+
+  <!-- Event snippet — "Request quote" conversion.
+       The quote form posts to Web3Forms, which only redirects back here with
+       ?status=success once it has accepted the submission. So this fires on a
+       server-confirmed success, never on a click, a validation pass, or a
+       failed request. Ad-page submissions convert on /thank-you/ instead. -->
+  <script>
+    (function () {
+      if (new URLSearchParams(window.location.search).get('status') !== 'success') return;
+
+      // One conversion per submission. The ?status=success parameter survives
+      // a reload or a back-button return, so skip if we already counted one
+      // recently. The 30-minute window still lets a genuinely separate
+      // request later in the day count on its own.
+      try {
+        var last = parseInt(sessionStorage.getItem('_410_conv') || '0', 10);
+        if (Date.now() - last < 1800000) return;
+        sessionStorage.setItem('_410_conv', String(Date.now()));
+      } catch (e) {
+        // Storage blocked (private mode, strict settings) — fall through and
+        // fire. A rare double-count beats silently losing real leads.
+      }
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18239637427/fyCzCIbj8dkcELOPq_lD',
+        'value': 1.0,
+        'currency': 'USD'
+      });
+    })();
+  </script>
+
   <!-- Favicon — root-absolute + stable URLs so Googlebot-Image can index them -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48.png" />
@@ -1941,7 +1979,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 410 Odd Jobs LLC · Howard County, Maryland · All rights reserved</p>
+    <p>© 2025 410 Odd Jobs LLC · Howard County, Maryland · All rights reserved · <a href="/privacy/">Privacy Policy</a></p>
     <a href="tel:4435186074" class="footer-phone-link">📞 (443) 518-6074</a>
   </div>
 </footer>

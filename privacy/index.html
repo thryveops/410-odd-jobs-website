@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | 410 Odd Jobs LLC — Howard County, MD</title>
+  <meta name="description" content="How 410 Odd Jobs LLC collects, uses, and protects the information you share when you request a quote or browse our website." />
+
+  <link rel="canonical" href="https://410oddjobs.com/privacy/" />
+
+  <!-- Google tag (gtag.js) — Google Ads conversion tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18239637427"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18239637427');
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: oklch(50% 0.27 25);
+      --red-light: oklch(62% 0.25 25);
+      --black: oklch(15% 0.04 258);
+      --black-2: oklch(19% 0.045 258);
+      --black-3: oklch(23% 0.05 258);
+      --off-white: oklch(97% 0.005 258);
+      --muted: oklch(60% 0.035 258);
+      --border: oklch(27% 0.055 258);
+      --font-head: 'Oswald', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background:
+        radial-gradient(900px 500px at 50% -10%, oklch(28% 0.09 258 / 0.6), transparent 70%),
+        var(--black);
+      color: var(--off-white);
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.65;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 1.25rem;
+    }
+    .topbar-inner {
+      max-width: 780px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .logo {
+      font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+      font-size: 1.25rem; letter-spacing: 0.02em;
+      color: var(--off-white); text-decoration: none;
+    }
+    .logo span { color: var(--red-light); }
+    .topbar a.call {
+      font-family: var(--font-head); font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; font-size: 0.85rem;
+      color: var(--off-white); text-decoration: none;
+      background: var(--red); padding: 0.6rem 1rem; border-radius: 8px;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+    .topbar a.call:hover { background: var(--red-light); }
+
+    .wrap { flex: 1; padding: 3rem 1.25rem 4rem; }
+    article { max-width: 780px; margin: 0 auto; }
+
+    h1 {
+      font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
+      font-size: clamp(2rem, 5.5vw, 2.9rem); line-height: 1.08;
+      letter-spacing: -0.005em; margin-bottom: 0.6rem;
+    }
+    h1 em { font-style: normal; color: var(--red-light); }
+
+    .updated {
+      color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem;
+      padding-bottom: 1.6rem; border-bottom: 1px solid var(--border);
+    }
+
+    .intro { font-size: 1.05rem; margin-bottom: 2.4rem; }
+
+    h2 {
+      font-family: var(--font-head); font-weight: 600; text-transform: uppercase;
+      font-size: 1.22rem; letter-spacing: 0.03em;
+      margin: 2.5rem 0 0.9rem;
+    }
+    h2:first-of-type { margin-top: 0; }
+
+    h3 {
+      font-family: var(--font-head); font-weight: 500;
+      font-size: 0.82rem; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--muted); margin: 1.5rem 0 0.6rem;
+    }
+
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul { margin: 0 0 1rem 0; padding-left: 0; list-style: none; display: grid; gap: 0.55rem; }
+    ul li { position: relative; padding-left: 1.35rem; }
+    ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.62em;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--red);
+    }
+
+    a { color: var(--red-light); }
+    a:hover { color: var(--off-white); }
+
+    strong { font-weight: 600; }
+
+    .callout {
+      background: var(--black-2); border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 11px; padding: 1.3rem 1.4rem; margin: 1.4rem 0;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .contact-box {
+      background: var(--black-3); border: 1px solid var(--border);
+      border-radius: 11px; padding: 1.5rem 1.5rem; margin-top: 1.2rem;
+    }
+    .contact-box a { text-decoration: none; font-weight: 600; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 1.6rem 1.25rem; font-size: 0.85rem; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--off-white); text-decoration: underline; }
+    .footer-links { margin-bottom: 0.6rem; display: flex; gap: 1.3rem; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 520px) {
+      .wrap { padding: 2.2rem 1.25rem 3rem; }
+      .topbar a.call { padding: 0.55rem 0.8rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="/" class="logo">410 <span>ODD</span> JOBS</a>
+    <a href="tel:4435186074" class="call">(443) 518-6074</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <article>
+    <h1>Privacy <em>Policy</em></h1>
+    <p class="updated">Last updated: August 1, 2026</p>
+
+    <p class="intro">
+      410 Odd Jobs LLC is a junk removal, moving, and hauling company serving Howard County,
+      Maryland. This page explains what information we collect through our website, why we
+      collect it, and what we do with it. We have tried to write it in plain English rather
+      than legal boilerplate.
+    </p>
+
+    <h2>Information You Give Us</h2>
+    <p>
+      When you fill out a quote request form on this site, we ask for:
+    </p>
+    <ul>
+      <li>Your name</li>
+      <li>Your phone number</li>
+      <li>The service you need</li>
+      <li>Your city</li>
+      <li>Your preferred date, if you give one</li>
+      <li>A description of the job</li>
+    </ul>
+    <p>
+      We use this information for exactly one purpose: to contact you about the job you asked
+      about and to quote and perform the work. We do not collect your email address through
+      this website, and we do not add you to any mailing list.
+    </p>
+
+    <h2>Information Collected Automatically</h2>
+
+    <h3>Advertising and conversion measurement</h3>
+    <p>
+      We run ads on Google. When someone clicks one of our ads and later submits a quote
+      request, Google Ads records that a request happened so we can tell which ads are
+      actually bringing in work. This uses cookies set by Google.
+    </p>
+    <p>
+      What this measurement tells us is aggregate and anonymous — how many requests came from
+      a given ad or search term. It does not tell us who you are, and we cannot use it to
+      identify you personally.
+    </p>
+
+    <h3>Ad click information</h3>
+    <p>
+      If you arrive from one of our ads, the web address may carry tracking codes from Google
+      identifying which ad and campaign you clicked. If you then submit a quote request, those
+      codes are included with it so we know which ad produced the lead. Your browser stores
+      this click identifier for up to one hour so that attribution still works if you navigate
+      away and come back before submitting.
+    </p>
+
+    <h3>Browser storage</h3>
+    <p>
+      This site stores a small amount of data in your browser: your light or dark display
+      preference, the ad click identifier described above, and a short-lived marker that
+      prevents a single quote request from being counted twice if you refresh the confirmation
+      page. None of this is used to build a profile of you, and none of it is shared.
+    </p>
+
+    <h3>Server logs</h3>
+    <p>
+      Our website host records standard technical information when pages are served, such as
+      IP addresses and browser types. This is ordinary web server activity that we do not
+      control, use for marketing, or connect to quote requests.
+    </p>
+
+    <h2>Who We Share Information With</h2>
+    <div class="callout">
+      <p>
+        <strong>We do not sell your personal information, and we never have.</strong> We do not
+        share it with other contractors, lead brokers, or marketing lists.
+      </p>
+    </div>
+    <p>
+      We rely on a small number of service providers to run the website. They handle
+      information only to provide their service to us:
+    </p>
+    <ul>
+      <li><strong>Web3Forms</strong> — receives your quote request submission and delivers it to our inbox.</li>
+      <li><strong>Google</strong> — provides advertising and conversion measurement, and serves the fonts used on this site.</li>
+      <li><strong>GitHub Pages</strong> — hosts the website itself.</li>
+    </ul>
+    <p>
+      We may also disclose information if the law requires it, or if it is necessary to protect
+      our rights, our customers, or someone's safety.
+    </p>
+
+    <h2>How Long We Keep It</h2>
+    <p>
+      Quote requests arrive as email and stay in our business records for as long as we need
+      them for the job, for follow-up work, and for ordinary bookkeeping. If you would like us
+      to delete your information, call us and we will take care of it.
+    </p>
+
+    <h2>Your Choices</h2>
+    <ul>
+      <li>
+        You can turn off personalized advertising in your
+        <a href="https://myadcenter.google.com/" target="_blank" rel="noopener">Google Ad Settings</a>,
+        or opt out industry-wide at
+        <a href="https://optout.aboutads.info/" target="_blank" rel="noopener">optout.aboutads.info</a>.
+      </li>
+      <li>
+        Your browser can block or delete cookies and site data. The quote form will still work
+        if you do — you may just see less relevant ads.
+      </li>
+      <li>
+        Most browsers and phones offer a "Do Not Track" or tracking-limitation setting, and
+        our advertising partners honor their own controls linked above.
+      </li>
+      <li>
+        You can ask us what information we hold about you, or ask us to delete it, by calling
+        the number below.
+      </li>
+    </ul>
+
+    <h2>Children</h2>
+    <p>
+      Our services are meant for adults arranging work on a property. This website is not
+      directed at children, and we do not knowingly collect information from anyone under 13.
+      If you believe a child has sent us information, please call us and we will remove it.
+    </p>
+
+    <h2>Security</h2>
+    <p>
+      The site is served over an encrypted connection, and quote requests are transmitted
+      securely. No method of transmission over the internet is perfectly secure, so we cannot
+      guarantee absolute security, but we do not ask for sensitive information — no payment
+      details, no Social Security numbers, and no account passwords are ever collected through
+      this website.
+    </p>
+
+    <h2>Changes to This Policy</h2>
+    <p>
+      If we change how we handle information, we will update this page and revise the date at
+      the top. Material changes will be reflected here before they take effect.
+    </p>
+
+    <h2>Contact Us</h2>
+    <p>
+      Questions about this policy, or about information we may hold about you? Get in touch:
+    </p>
+    <div class="contact-box">
+      <p>
+        <strong>410 Odd Jobs LLC</strong><br />
+        Howard County, Maryland<br />
+        <a href="tel:4435186074">(443) 518-6074</a>
+      </p>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/reviews.html">Reviews</a>
+    <a href="/quote/">Get a Quote</a>
+  </div>
+  &copy; <span id="year">2026</span> 410 Odd Jobs LLC · Howard County, Maryland
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

@@ -10,6 +10,41 @@
        landed on directly and inflate the conversion count. -->
   <meta name="robots" content="noindex, nofollow" />
 
+  <!-- Google tag (gtag.js) — Google Ads conversion tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18239637427"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18239637427');
+  </script>
+
+  <!-- Event snippet — "Request quote" conversion.
+       Web3Forms only redirects here once it has accepted the submission, so
+       reaching this page is a server-confirmed success. A validation failure
+       or a failed request never gets here. -->
+  <script>
+    (function () {
+      // One conversion per submission. Reloading, hitting back, or returning
+      // to this URL re-runs the script, so skip if we already counted one
+      // recently. The 30-minute window still lets a genuinely separate
+      // request later in the day count on its own.
+      try {
+        var last = parseInt(sessionStorage.getItem('_410_conv') || '0', 10);
+        if (Date.now() - last < 1800000) return;
+        sessionStorage.setItem('_410_conv', String(Date.now()));
+      } catch (e) {
+        // Storage blocked (private mode, strict settings) — fall through and
+        // fire. A rare double-count beats silently losing real leads.
+      }
+      gtag('event', 'conversion', {
+        'send_to': 'AW-18239637427/fyCzCIbj8dkcELOPq_lD',
+        'value': 1.0,
+        'currency': 'USD'
+      });
+    })();
+  </script>
+
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/images/favicon-48.png" />
@@ -164,45 +199,12 @@
 </div>
 
 <footer>
-  &copy; <span id="year">2026</span> 410 Odd Jobs LLC · Howard County, Maryland
+  &copy; <span id="year">2026</span> 410 Odd Jobs LLC · Howard County, Maryland ·
+  <a href="/privacy/" style="color:inherit;">Privacy Policy</a>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<!-- ══════════════════════════════════════════════════════════════════════
-     GOOGLE ADS CONVERSION TRACKING
-
-     Fill in the two values below with the Conversion ID and Conversion Label
-     from the Google Ads account:
-
-       Google Ads → Goals → Conversions → Summary → (open the conversion
-       action) → "Tag setup" → "Use Google tag" → the snippet contains
-         gtag('event', 'conversion', {'send_to': 'AW-123456789/AbCdEfGhIj'})
-                                                  └── ID ──┘ └── LABEL ──┘
-
-     Until both are filled in, nothing loads and no request is made — the page
-     stays fast and no bad data is sent to the Ads account.
-     ══════════════════════════════════════════════════════════════════════ -->
-<script>
-  var ADS_CONVERSION_ID    = '';   // e.g. 'AW-123456789'
-  var ADS_CONVERSION_LABEL = '';   // e.g. 'AbCdEfGhIj'
-
-  if (ADS_CONVERSION_ID && ADS_CONVERSION_LABEL) {
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ADS_CONVERSION_ID;
-    document.head.appendChild(s);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', ADS_CONVERSION_ID);
-    gtag('event', 'conversion', {
-      'send_to': ADS_CONVERSION_ID + '/' + ADS_CONVERSION_LABEL
-    });
-  }
 </script>
 
 </body>
