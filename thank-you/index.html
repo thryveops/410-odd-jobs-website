@@ -10,13 +10,16 @@
        landed on directly and inflate the conversion count. -->
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Google tag (gtag.js) — Google Ads conversion tracking -->
+  <!-- Google tag (gtag.js) — one loader, two destinations: Google Ads
+       conversion tracking and GA4 analytics. A product added later gets
+       another gtag('config', ...) line here, never a second gtag/js tag. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18239637427"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-18239637427');
+    gtag('config', 'G-EF7KCFC6J9');
   </script>
 
   <!-- Event snippet — "Request quote" conversion.
