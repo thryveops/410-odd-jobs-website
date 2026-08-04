@@ -133,6 +133,9 @@
       --off-white: oklch(97% 0.005 258);
       --muted: oklch(60% 0.035 258);
       --border: oklch(27% 0.055 258);
+      /* Review stars — darkened in light mode, where the dark-mode gold
+         drops below readable contrast on a white card. */
+      --gold: oklch(78% 0.16 80);
       --font-head: 'Oswald', sans-serif;
       --font-body: 'DM Sans', sans-serif;
     }
@@ -145,6 +148,7 @@
       --muted: oklch(40% 0.02 258);     /* Darker muted text */
       --border: oklch(90% 0.01 258);
       --red: oklch(50% 0.25 25);        /* Slightly deeper red for white bg */
+      --gold: oklch(62% 0.15 75);       /* Deeper gold so stars stay legible */
     }
 
     /* Seamless white hero logo in light mode */
@@ -753,51 +757,6 @@
     }
     .gallery-item:hover .gallery-label { opacity: 1; transform: translateY(0); }
 
-    /* ─── GOOGLE REVIEW CTA ──────────────────────────────── */
-    .google-review-cta {
-      background: var(--black-2);
-      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 2rem);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
-    .google-review-card {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--black-3);
-      padding: clamp(2rem, 4vw, 3rem);
-      border: 1px solid var(--border);
-      position: relative;
-    }
-    .google-logo-wrap {
-      margin-bottom: 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      align-items: center;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-    .google-logo-wrap span:nth-child(1) { color: #4285F4; }
-    .google-logo-wrap span:nth-child(2) { color: #EA4335; }
-    .google-logo-wrap span:nth-child(3) { color: #FBBC05; }
-    .google-logo-wrap span:nth-child(4) { color: #4285F4; }
-    .google-logo-wrap span:nth-child(5) { color: #34A853; }
-    .google-logo-wrap span:nth-child(6) { color: #EA4335; }
-
-    .google-review-cta h3 {
-      font-family: var(--font-head);
-      font-size: 1.75rem;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .google-review-cta p {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
     .btn-google {
       background: #fff;
       color: #000;
@@ -903,52 +862,104 @@
       letter-spacing: 0.04em;
     }
 
-    /* ─── TESTIMONIALS ───────────────────────────────────── */
-    #reviews { background: var(--black-2); }
-
     /* ─── REVIEWS ────────────────────────────────────────── */
+    #reviews { background: var(--black-2); overflow: hidden; }
+
+    /* Google aggregate bar — the review count and rating lead the section
+       instead of hiding in a button at the bottom. */
+    .trust-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.85rem, 2vw, 1.1rem);
+      margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;
+      padding: clamp(0.85rem, 2vw, 1rem) clamp(1.1rem, 3vw, 1.6rem);
+      border: 1px solid var(--border);
+      background: var(--black-3);
+      width: fit-content;
+      max-width: 100%;
+    }
+    .trust-bar .gmark { width: 34px; height: 34px; flex-shrink: 0; }
+    .trust-div { width: 1px; align-self: stretch; background: var(--border); }
+    .trust-score { display: flex; align-items: center; gap: 0.6rem; }
+    .trust-score .num {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .trust-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--gold);
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      letter-spacing: 1px;
+    }
+    .trust-meta {
+      font-size: clamp(0.66rem, 1.8vw, 0.75rem);
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
     .reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1px;
       background: var(--border);
     }
-    .reviews-cta {
-      margin-top: clamp(2rem, 4vw, 3rem);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .reviews-cta-note {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-weight: 300;
-    }
-
     .review-card {
       background: var(--black-2);
       padding: clamp(1.75rem, 3vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
     }
-
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
     .stars {
       display: flex;
       gap: 2px;
-      margin-bottom: 1.25rem;
-      color: oklch(78% 0.16 80);
+      color: var(--gold);
       font-size: 1rem;
     }
+    .verified {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+    .verified svg { width: 13px; height: 13px; }
 
     .review-text {
       font-size: 1rem;
       font-weight: 300;
       line-height: 1.8;
-      color: oklch(80% 0.02 258);
+      color: var(--off-white);
+      opacity: 0.82;
       margin-bottom: 1.5rem;
       font-style: italic;
+      flex: 1;
     }
     .review-text::before { content: '"'; }
     .review-text::after { content: '"'; }
+    /* Short reviews get display treatment instead of a half-empty card.
+       Add class="review-text is-short" when a review is under ~15 words. */
+    .review-text.is-short {
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      line-height: 1.5;
+      font-style: normal;
+      font-weight: 400;
+      opacity: 1;
+    }
 
     .reviewer {
       display: flex;
@@ -975,10 +986,103 @@
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
-    .reviewer-location {
+    .reviewer-date {
       font-size: 0.8rem;
       color: var(--muted);
       font-weight: 300;
+    }
+
+    /* ─── PULL-QUOTE TICKER ──────────────────────────────── */
+    .ticker-label {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: clamp(2.2rem, 4vw, 3rem) 0 1.1rem;
+    }
+    .ticker { position: relative; overflow: hidden; }
+    .ticker-track {
+      display: flex;
+      gap: 1px;
+      width: max-content;
+      background: var(--border);
+      animation: ticker-slide 46s linear infinite;
+    }
+    .ticker:hover .ticker-track,
+    .ticker:focus-within .ticker-track { animation-play-state: paused; }
+    @keyframes ticker-slide {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .chip {
+      background: var(--black-2);
+      padding: 1.1rem 1.5rem;
+      /* Narrower than the gap between the edge fades, so a chip is never
+         clipped on both sides at once on a phone. */
+      width: min(290px, 68vw);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .chip .stars { font-size: 0.82rem; }
+    .chip q {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--off-white);
+      opacity: 0.82;
+      font-style: italic;
+    }
+    .chip .who {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+    .chip .who svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .chip .who strong {
+      font-family: var(--font-head);
+      font-weight: 600;
+      color: var(--off-white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    .ticker-fade {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: clamp(50px, 8vw, 110px);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .ticker-fade-l { left: 0;  background: linear-gradient(to right, var(--black-2), transparent); }
+    .ticker-fade-r { right: 0; background: linear-gradient(to left,  var(--black-2), transparent); }
+
+    /* The ticker is decoration layered on top of the three readable reviews.
+       If motion is unwelcome it simply sits still — nothing is lost. */
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
+    }
+
+    /* ─── REVIEWS CTA ────────────────────────────────────── */
+    .reviews-cta {
+      margin-top: clamp(2rem, 4vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .reviews-cta-note {
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-top: 0.35rem;
     }
 
     /* ─── SERVICE AREAS ──────────────────────────────────── */
@@ -1707,64 +1811,106 @@
     <div class="section-header">
       <p class="section-label reveal">Customer Reviews</p>
       <h2 class="section-title reveal reveal-delay-1">What People Are Saying</h2>
+
+      <div class="trust-bar reveal reveal-delay-2">
+        <svg class="gmark" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <div class="trust-div"></div>
+        <div>
+          <div class="trust-score">
+            <span class="num">5.0</span>
+            <span class="trust-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+          </div>
+          <p class="trust-meta"><span data-review-count>50</span> Reviews · Howard County, MD</p>
+        </div>
+      </div>
     </div>
 
+      <!-- ══════════════════════════════════════════════════════════════════
+           WEEKLY UPDATE — FEATURED REVIEWS
+           These three must be the newest reviews on the Google listing.
+           Get them here, with the sort set to "Newest":
+           https://search.google.com/local/reviews?placeid=ChIJBfkPVNXE6AURgcKLg98SKTw
+           Full instructions: docs/WEEKLY-REVIEW-UPDATE.md
+           Under ~15 words? Add "is-short" to the review-text class so the
+           card gets display type instead of looking half empty.
+           ══════════════════════════════════════════════════════════════════ -->
     <div class="reviews-grid">
       <div class="review-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="review-text">We've used 410 Odd Jobs for a variety of services including yard work, mulching and an office move. The 410 Odd Jobs crew are professional, timely, fair and true gentlemen. I will be using them for all of my moves, landscaping and junk removal for many years to come.</p>
+        <div class="card-top">
+          <div class="stars">★★★★★</div>
+          <span class="verified">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Verified
+          </span>
+        </div>
+        <p class="review-text is-short">10/10 would use again. Professional, courteous, and respectful.</p>
         <div class="reviewer">
-          <div class="reviewer-avatar">C</div>
+          <div class="reviewer-avatar">S</div>
           <div>
-            <p class="reviewer-name">Cynthia Graham</p>
-            <p class="reviewer-location">Google Review</p>
+            <p class="reviewer-name">Sina Negahban</p>
+            <p class="reviewer-date">3 days ago</p>
           </div>
         </div>
       </div>
       <div class="review-card reveal reveal-delay-1">
-        <div class="stars">★★★★★</div>
-        <p class="review-text">Great service from 410 Odd Jobs. I called them to remove two oversized pieces of furniture that we didn't want anymore. Jay and Jayden were friendly, polite, and considerate. They had to take apart one piece to get it out of the room it was in. They were fast and efficient and didn't touch any walls or other items when removing. I would recommend them to anyone</p>
+        <div class="card-top">
+          <div class="stars">★★★★★</div>
+          <span class="verified">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Verified
+          </span>
+        </div>
+        <p class="review-text">I had an excellent experience with 410 Odd Jobs LLC. They were prompt, professional, and offered the most cost-effective quote compared to other bulk trash removal companies I contacted. The team handled everything with care, worked efficiently, and made the entire process smooth and stress-free. It's refreshing to find a company that delivers outstanding service without overcharging.</p>
         <div class="reviewer">
-          <div class="reviewer-avatar">S</div>
+          <div class="reviewer-avatar">A</div>
           <div>
-            <p class="reviewer-name">Scott White</p>
-            <p class="reviewer-location">Google Review</p>
+            <p class="reviewer-name">Abe Durojaiye</p>
+            <p class="reviewer-date">5 days ago</p>
           </div>
         </div>
       </div>
       <div class="review-card reveal reveal-delay-2">
-        <div class="stars">★★★★★</div>
-        <p class="review-text">I absolutely recommend Ahmad and his team. I needed my stuffs to be removed last minute and asked him for a quote at 10 pm. He answered my text message very quickly and provided the service the very next day. Two people came right on time (with 15-minute arrival notice), they got the job done perfectly and professionally. Ahmad is such a friendly, polite, and trustworthy young man. If you're looking for great local services, reach out to them!</p>
+        <div class="card-top">
+          <div class="stars">★★★★★</div>
+          <span class="verified">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Verified
+          </span>
+        </div>
+        <p class="review-text">Ahmad and his crew did an outstanding job! They arrived to my house on time to haul away a large amount of junk, and they exceeded my expectations. They were professional, efficient, and worked hard from start to finish. They loaded everything neatly into a U-Haul truck and handled the entire job perfectly.</p>
         <div class="reviewer">
-          <div class="reviewer-avatar">J</div>
+          <div class="reviewer-avatar">D</div>
           <div>
-            <p class="reviewer-name">Juman Kim</p>
-            <p class="reviewer-location">Google Review</p>
+            <p class="reviewer-name">David N</p>
+            <p class="reviewer-date">6 days ago</p>
           </div>
         </div>
       </div>
     </div>
+    <!-- ═══ END WEEKLY UPDATE — FEATURED REVIEWS ═══ -->
 
-    <div class="reviews-cta reveal">
-      <a href="reviews.html" class="btn btn-outline btn-lg">See All 46 Reviews →</a>
-      <p class="reviews-cta-note">Reviews from Google & Facebook</p>
-    </div>
+    <!-- "rest" = total minus the three featured above. Derived by
+         scripts/update-review-count.py so there is still only one number
+         to change each week. -->
+    <p class="ticker-label">…and <span data-review-count-rest>47</span> more</p>
   </div>
-</section>
 
-<!-- GOOGLE REVIEW CTA -->
-<section class="google-review-cta">
+  <!-- Pull-quote ticker. Short verbatim reviews only — long ones stay in the
+       three cards above where they can actually be read. Pauses on hover. -->
+  <div class="ticker">
+    <div class="ticker-fade ticker-fade-l"></div>
+    <div class="ticker-fade ticker-fade-r"></div>
+    <div class="ticker-track" id="review-ticker"></div>
+  </div>
+
   <div class="container">
-    <div class="google-review-card reveal">
-      <div class="google-logo-wrap">
-        <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
-      </div>
-      <h3>Happy with our service?</h3>
-      <p>Your feedback helps us grow! If Ahmad and the team did a great job, we'd love for you to leave us a 5-star review on Google.</p>
-      <a href="https://search.google.com/local/writereview?placeid=ChIJBfkPVNXE6AURgcKLg98SKTw&source=g.page.m.ia._&utm_source=gbp&laa=nmx-review-solicitation-ia2" target="_blank" class="btn btn-google">
-        <img src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="Google G Logo" width="18">
-        Write a Review on Google
+    <div class="reviews-cta reveal">
+      <a href="reviews.html" class="btn btn-outline btn-lg">See All <span data-review-count>50</span> Reviews →</a>
+      <a href="https://search.google.com/local/writereview?placeid=ChIJBfkPVNXE6AURgcKLg98SKTw&source=g.page.m.ia._&utm_source=gbp&laa=nmx-review-solicitation-ia2" target="_blank" rel="noopener" class="btn btn-google">
+        <img src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="" width="18">
+        Write a Review
       </a>
+      <p class="reviews-cta-note">Reviews from Google &amp; Facebook</p>
     </div>
   </div>
 </section>
@@ -2008,6 +2154,35 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => revealObserver.observe(el));
+
+  /* ─── Review pull-quote ticker ─────────────────────────────────────────
+     Short verbatim Google reviews, rendered twice so the -50% keyframe
+     loops seamlessly. These rarely need touching — a one-line quote does
+     not go stale the way "our three most recent" does. To swap one, edit
+     the array; the duplication is handled below. */
+  const tickerTrack = document.getElementById('review-ticker');
+  if (tickerTrack) {
+    const PULL_QUOTES = [
+      ['Darrin Sprouse',  'On time. Fair price. Great communication.'],
+      ['Diane',           "Courteous, Professional, Friendly and Efficient. I'm definitely hiring again!"],
+      ['Carl Berger',     'Prompt, efficient, courteous, and value priced. Would use again!'],
+      ['Traci Baker',     'I would highly recommend 410 Odd Jobs! Very professional and reliable!'],
+      ['Mike Mercurio',   "Courteous and hard working! I've used them twice and will soon again."],
+      ['Doris Schuyler',  'Very friendly and accommodating. So easy to work with when planning.'],
+      ['Karen McCormack', 'Very prompt, reliable and a pleasure to work with.'],
+      ['Asheik Hussain',  'Ahmad and his team did a fantastic job!'],
+      ['Stacey Uebersax', 'Easy to schedule and a seamless pick up. Fantastic communication throughout.'],
+      ['Mike',            "Excellent communication and customer service. I didn't have to lift a finger."]
+    ];
+    const GOOGLE_G = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+    const esc = s => s.replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+    tickerTrack.innerHTML = PULL_QUOTES.concat(PULL_QUOTES).map(
+      ([who, text]) =>
+        '<div class="chip"><div class="stars">★★★★★</div>' +
+        '<q>' + esc(text) + '</q>' +
+        '<span class="who">' + GOOGLE_G + '<strong>' + esc(who) + '</strong></span></div>'
+    ).join('');
+  }
 
   // Theme Toggle Logic
   const themeToggle = document.getElementById('theme-toggle');

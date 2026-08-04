@@ -103,21 +103,46 @@ def check_reviews(index_html, reviews_html):
         if count > 1:
             fail(f"identical review text appears {count}x: {text[:60]!r}...")
 
+    # Counts are wrapped in data-review-count elements so one script can keep
+    # them in sync. Unwrap them back to bare numbers first, so the patterns
+    # below stay readable and keep matching whether or not a given spot is
+    # tagged yet.
+    def unwrap_counts(html):
+        return re.sub(
+            r"<([a-z]+)[^>]*\bdata-review-count(?![-\w])[^>]*>\s*(\d+)\s*</\1>",
+            lambda m: m.group(2),
+            html,
+        )
+
     # Every stated count must equal the number of cards actually rendered.
     claims = [
         (REVIEWS, rf"Read {total} verified", "meta description"),
         (REVIEWS, rf"{total} verified reviews", "page subtitle"),
-        (REVIEWS, rf"<strong>{total}</strong>", "count badge"),
+        # Matched by its label rather than its tag, since unwrapping the
+        # count marker takes the <strong> with it.
+        (REVIEWS, rf"{total}\s*<span>Total Reviews", "count badge"),
         (INDEX, rf"See All {total} Reviews", "homepage CTA"),
         # The Google Ads landing page repeats the count in its trust bar, so it
         # drifts out of sync the same way the others do.
-        (QUOTE, rf"data-review-count>{total}<", "ads landing page trust bar"),
+        (QUOTE, rf"{total} verified reviews", "ads landing page trust bar"),
+        # Homepage trust bar, above the three featured reviews.
+        (INDEX, rf"{total} Reviews · Howard County", "homepage trust bar"),
     ]
     for path, pattern, where in claims:
         if not os.path.exists(path):
             continue
-        if not re.search(pattern, read(path)):
+        if not re.search(pattern, unwrap_counts(read(path))):
             fail(f"{where}: does not state the real review count ({total})")
+
+    # The ticker label says "...and N more", where N excludes the three
+    # reviews featured above it. Off-by-three here reads as a miscount.
+    featured = len(re.findall(r'<p class="review-text', read(INDEX)))
+    rest = re.search(r"data-review-count-rest[^>]*>\s*(\d+)\s*<", read(INDEX))
+    if rest and int(rest.group(1)) != total - featured:
+        fail(
+            f"homepage ticker says {rest.group(1)} more, but {total} total "
+            f"minus {featured} featured is {total - featured}"
+        )
 
     stale = re.findall(r"\b(\d{2})\+? (?:verified )?[Rr]eviews\b", reviews_html)
     for n in set(stale):

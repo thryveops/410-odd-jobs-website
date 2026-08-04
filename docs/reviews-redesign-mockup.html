@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>410 Odd Jobs — Reviews Section Redesign: Option A vs B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red: oklch(50% 0.27 25);
+    --red-light: oklch(62% 0.25 25);
+    --blue: oklch(42% 0.17 258);
+    --blue-light: oklch(52% 0.17 258);
+    --black: oklch(15% 0.04 258);
+    --black-2: oklch(19% 0.045 258);
+    --black-3: oklch(23% 0.05 258);
+    --off-white: oklch(97% 0.005 258);
+    --muted: oklch(60% 0.035 258);
+    --border: oklch(27% 0.055 258);
+    --gold: oklch(78% 0.16 80);
+    --font-head:'Oswald',sans-serif;
+    --font-body:'DM Sans',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:oklch(11% 0.03 258);font-family:var(--font-body);color:var(--off-white);-webkit-font-smoothing:antialiased}
+
+  /* ─── BOARD CHROME ─────────────────────────────────── */
+  .board-head{padding:2.5rem clamp(1rem,3vw,2.5rem) 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:oklch(11% 0.03 258 / .96);backdrop-filter:blur(12px);z-index:50}
+  .board-head h1{font-family:var(--font-head);font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .board-head p{color:var(--muted);font-size:.9rem;font-weight:300;margin-top:.4rem;max-width:70ch}
+  .toggle{display:flex;gap:0;margin-top:1.25rem;border:1px solid var(--border);width:fit-content}
+  .toggle button{background:none;border:0;color:var(--muted);font-family:var(--font-head);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.6rem 1.1rem;cursor:pointer;transition:.2s}
+  .toggle button[aria-pressed="true"]{background:var(--red);color:#fff}
+
+  .board{padding:clamp(1rem,3vw,2.5rem);display:grid;gap:clamp(1rem,2.5vw,2rem)}
+  .board[data-view="side"]{grid-template-columns:1fr 1fr}
+  .board[data-view="stack"]{grid-template-columns:1fr}
+  @media(max-width:900px){.board[data-view="side"]{grid-template-columns:1fr}}
+
+  /* min-width:0 — without it the 1280px canvas blows the grid column open
+     and the scale-to-fit measures the wrong width. */
+  .panel{border:1px solid var(--border);background:var(--black);min-width:0}
+  .panel-tag{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;padding:1rem 1.25rem;border-bottom:1px solid var(--border);background:var(--black-2)}
+  .panel-tag .letter{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--red-light);line-height:1}
+  .panel-tag .name{font-family:var(--font-head);font-size:.95rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .panel-tag .note{color:var(--muted);font-size:.8rem;font-weight:300}
+  .stage{overflow:hidden;position:relative;min-width:0}
+  .canvas{width:1280px;transform-origin:top left}
+
+  /* ─── 410 SECTION STYLES (ported 1:1 from index.html) ── */
+  .sec{background:var(--black-2);padding:clamp(3rem,6vw,5.5rem) 0;font-family:var(--font-body)}
+  .container{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+  .section-header{text-align:center;margin-bottom:clamp(2rem,4vw,3rem)}
+  .section-label{font-family:var(--font-head);font-size:.78rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--red-light);margin-bottom:.65rem}
+  .section-title{font-family:var(--font-head);font-size:clamp(1.9rem,3.6vw,2.9rem);font-weight:600;letter-spacing:.02em;line-height:1.15}
+
+  /* ── THE NEW PIECE: Google trust bar ── */
+  .trust-bar{display:flex;align-items:center;justify-content:center;gap:1.1rem;margin:1.75rem auto 0;padding:1rem 1.6rem;border:1px solid var(--border);background:var(--black-3);width:fit-content}
+  .trust-bar .gmark{width:34px;height:34px;flex-shrink:0}
+  .trust-score{display:flex;align-items:center;gap:.6rem}
+  .trust-score .num{font-family:var(--font-head);font-size:1.75rem;font-weight:700;line-height:1}
+  .trust-stars{display:flex;gap:2px;color:var(--gold);font-size:1.05rem;letter-spacing:1px}
+  .trust-meta{font-size:.75rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:400;margin-top:.3rem}
+  .trust-div{width:1px;align-self:stretch;background:var(--border)}
+
+  /* ── Grid (unchanged structure) ── */
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+  .review-card{background:var(--black-2);padding:clamp(1.6rem,2.6vw,2.2rem);display:flex;flex-direction:column}
+  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.15rem}
+  .stars{display:flex;gap:2px;color:var(--gold);font-size:1rem}
+  .verified{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted);letter-spacing:.06em}
+  .verified svg{width:13px;height:13px}
+  .review-text{font-size:.97rem;font-weight:300;line-height:1.8;color:oklch(80% 0.02 258);margin-bottom:1.5rem;font-style:italic;flex:1}
+  .review-text::before{content:'"'}.review-text::after{content:'"'}
+  .reviewer{display:flex;align-items:center;gap:.75rem}
+  .reviewer-avatar{width:40px;height:40px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:1rem;color:#fff;flex-shrink:0}
+  .reviewer-name{font-family:var(--font-head);font-size:.95rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .reviewer-date{font-size:.78rem;color:var(--muted);font-weight:300}
+
+  /* ── Merged CTA row ── */
+  .cta-row{margin-top:clamp(2rem,4vw,3rem);display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;font-family:var(--font-head);font-size:.85rem;font-weight:500;letter-spacing:.11em;text-transform:uppercase;padding:1rem 1.9rem;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:.25s}
+  .btn-outline{border-color:var(--border);color:var(--off-white);background:none}
+  .btn-outline:hover{border-color:var(--red-light);color:var(--red-light)}
+  .btn-google{background:#fff;color:#3c4043;font-family:var(--font-body);font-weight:500;letter-spacing:.02em;text-transform:none;font-size:.92rem}
+  .btn-google:hover{background:oklch(93% 0.005 258)}
+  .btn-google svg{width:17px;height:17px}
+  .cta-note{width:100%;text-align:center;font-size:.82rem;color:var(--muted);font-weight:300;margin-top:.35rem}
+
+  /* ── OPTION B: pull-quote marquee ── */
+  .marquee-label{text-align:center;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:clamp(2.2rem,4vw,3rem) 0 1.1rem}
+  .marquee{position:relative;overflow:hidden;padding:.25rem 0}
+  .marquee-track{display:flex;gap:1px;width:max-content;background:var(--border);animation:slide 46s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .chip{background:var(--black-2);padding:1.1rem 1.5rem;min-width:290px;display:flex;flex-direction:column;gap:.55rem}
+  .chip .stars{font-size:.82rem}
+  .chip q{font-size:.9rem;font-weight:300;line-height:1.6;color:oklch(80% 0.02 258);font-style:italic}
+  .chip .who{display:flex;align-items:center;gap:.45rem;font-size:.76rem;color:var(--muted);letter-spacing:.05em}
+  .chip .who svg{width:12px;height:12px;flex-shrink:0}
+  .chip .who strong{font-family:var(--font-head);font-weight:600;color:var(--off-white);letter-spacing:.04em;text-transform:uppercase;font-size:.78rem}
+  .fade{position:absolute;top:0;bottom:0;width:110px;pointer-events:none;z-index:2}
+  .fade-l{left:0;background:linear-gradient(to right,var(--black-2),transparent)}
+  .fade-r{right:0;background:linear-gradient(to left,var(--black-2),transparent)}
+
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+  /* ─── ANNOTATIONS ─────────────────────────────────── */
+  .notes{padding:0 clamp(1rem,3vw,2.5rem) 4rem;display:grid;gap:clamp(1rem,2.5vw,2rem)}
+  .board[data-view="side"]~.notes{grid-template-columns:1fr 1fr}
+  @media(max-width:900px){.board[data-view="side"]~.notes{grid-template-columns:1fr}}
+  .note-card{border:1px solid var(--border);border-top:2px solid var(--red);padding:1.4rem 1.6rem;background:var(--black)}
+  .note-card h3{font-family:var(--font-head);font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.9rem}
+  .note-card ul{list-style:none;display:grid;gap:.6rem}
+  .note-card li{font-size:.88rem;font-weight:300;line-height:1.6;color:oklch(78% 0.02 258);padding-left:1.1rem;position:relative}
+  .note-card li::before{content:'▸';position:absolute;left:0;color:var(--red-light)}
+  .note-card li b{font-weight:500;color:var(--off-white)}
+</style>
+</head>
+<body>
+
+<div class="board-head">
+  <h1>410 Odd Jobs — Reviews Section Redesign</h1>
+  <p>Two directions for the homepage Google review block, built in the live site palette. Option A keeps the current grid and adds the credibility layer. Option B adds a slow pull-quote ticker underneath to surface the other 43 reviews.</p>
+  <div class="toggle" role="group" aria-label="View mode">
+    <button id="btn-side" aria-pressed="true">Side by side</button>
+    <button id="btn-stack" aria-pressed="false">Full size</button>
+  </div>
+</div>
+
+<div class="board" id="board" data-view="side">
+
+  <!-- ══════════════ OPTION A ══════════════ -->
+  <div class="panel">
+    <div class="panel-tag">
+      <span class="letter">A</span>
+      <span class="name">Trust Bar + Enriched Grid</span>
+      <span class="note">Static · lowest risk · ~1hr build</span>
+    </div>
+    <div class="stage"><div class="canvas">
+      <section class="sec">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-label">Customer Reviews</p>
+            <h2 class="section-title">What People Are Saying</h2>
+            <div class="trust-bar">
+              <svg class="gmark" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              <div class="trust-div"></div>
+              <div>
+                <div class="trust-score">
+                  <span class="num">4.9</span>
+                  <span class="trust-stars">★★★★★</span>
+                </div>
+                <p class="trust-meta">46 Reviews · Howard County, MD</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="card-top">
+                <div class="stars">★★★★★</div>
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Verified</span>
+              </div>
+              <p class="review-text">We've used 410 Odd Jobs for a variety of services including yard work, mulching and an office move. The crew are professional, timely, fair and true gentlemen. I will be using them for all of my moves, landscaping and junk removal for many years to come.</p>
+              <div class="reviewer">
+                <div class="reviewer-avatar">C</div>
+                <div><p class="reviewer-name">Cynthia Graham</p><p class="reviewer-date">3 weeks ago</p></div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="card-top">
+                <div class="stars">★★★★★</div>
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Verified</span>
+              </div>
+              <p class="review-text">I called them to remove two oversized pieces of furniture. Jay and Jayden were friendly, polite, and considerate. They had to take apart one piece to get it out of the room. Fast and efficient and didn't touch any walls or other items when removing.</p>
+              <div class="reviewer">
+                <div class="reviewer-avatar">S</div>
+                <div><p class="reviewer-name">Scott White</p><p class="reviewer-date">1 month ago</p></div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="card-top">
+                <div class="stars">★★★★★</div>
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Verified</span>
+              </div>
+              <p class="review-text">I needed my stuff removed last minute and asked him for a quote at 10 pm. He answered very quickly and provided the service the very next day. Two people came right on time, with 15-minute arrival notice, and got the job done perfectly and professionally.</p>
+              <div class="reviewer">
+                <div class="reviewer-avatar">J</div>
+                <div><p class="reviewer-name">Juman Kim</p><p class="reviewer-date">2 months ago</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a href="#" class="btn btn-outline">See All 46 Reviews →</a>
+            <a href="#" class="btn btn-google"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Write a Review</a>
+            <p class="cta-note">Reviews from Google &amp; Facebook</p>
+          </div>
+        </div>
+      </section>
+    </div></div>
+  </div>
+
+  <!-- ══════════════ OPTION B ══════════════ -->
+  <div class="panel">
+    <div class="panel-tag">
+      <span class="letter">B</span>
+      <span class="name">Grid + Pull-Quote Ticker</span>
+      <span class="note">Motion · surfaces all 46 · ~3hr build</span>
+    </div>
+    <div class="stage"><div class="canvas">
+      <section class="sec">
+        <div class="container">
+          <div class="section-header">
+            <p class="section-label">Customer Reviews</p>
+            <h2 class="section-title">What People Are Saying</h2>
+            <div class="trust-bar">
+              <svg class="gmark" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              <div class="trust-div"></div>
+              <div>
+                <div class="trust-score">
+                  <span class="num">4.9</span>
+                  <span class="trust-stars">★★★★★</span>
+                </div>
+                <p class="trust-meta">46 Reviews · Howard County, MD</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="card-top">
+                <div class="stars">★★★★★</div>
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Verified</span>
+              </div>
+              <p class="review-text">We've used 410 Odd Jobs for a variety of services including yard work, mulching and an office move. The crew are professional, timely, fair and true gentlemen. I will be using them for all of my moves, landscaping and junk removal for many years to come.</p>
+              <div class="reviewer">
+                <div class="reviewer-avatar">C</div>
+                <div><p class="reviewer-name">Cynthia Graham</p><p class="reviewer-date">3 weeks ago</p></div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="card-top">
+                <div class="stars">★★★★★</div>
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Verified</span>
+              </div>
+              <p class="review-text">I called them to remove two oversized pieces of furniture. Jay and Jayden were friendly, polite, and considerate. They had to take apart one piece to get it out of the room. Fast and efficient and didn't touch any walls or other items when removing.</p>
+              <div class="reviewer">
+                <div class="reviewer-avatar">S</div>
+                <div><p class="reviewer-name">Scott White</p><p class="reviewer-date">1 month ago</p></div>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="card-top">
+                <div class="stars">★★★★★</div>
+                <span class="verified"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Verified</span>
+              </div>
+              <p class="review-text">I needed my stuff removed last minute and asked him for a quote at 10 pm. He answered very quickly and provided the service the very next day. Two people came right on time, with 15-minute arrival notice, and got the job done perfectly and professionally.</p>
+              <div class="reviewer">
+                <div class="reviewer-avatar">J</div>
+                <div><p class="reviewer-name">Juman Kim</p><p class="reviewer-date">2 months ago</p></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="marquee-label">…and 43 more</p>
+        </div>
+
+        <div class="marquee">
+          <div class="fade fade-l"></div>
+          <div class="fade fade-r"></div>
+          <div class="marquee-track" id="track"></div>
+        </div>
+
+        <div class="container">
+          <div class="cta-row">
+            <a href="#" class="btn btn-outline">See All 46 Reviews →</a>
+            <a href="#" class="btn btn-google"><svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Write a Review</a>
+            <p class="cta-note">Reviews from Google &amp; Facebook</p>
+          </div>
+        </div>
+      </section>
+    </div></div>
+  </div>
+</div>
+
+<div class="notes">
+  <div class="note-card">
+    <h3>Option A — what changed</h3>
+    <ul>
+      <li><b>Google trust bar added.</b> 4.9, gold stars, and the review count now lead the section instead of hiding in a button at the bottom.</li>
+      <li><b>Per-card Google mark + "Verified."</b> Replaces the muted "Google Review" label — reads as third-party proof at a glance.</li>
+      <li><b>Relative dates added.</b> "3 weeks ago" signals the business is active right now. Currently there is no recency signal anywhere.</li>
+      <li><b>Write-a-Review CTA merged in.</b> Kills the separate section that sits directly below today — two review sections back to back dilute each other.</li>
+      <li><b>Grid untouched.</b> Same hairline 3-up layout, so nothing about the page rhythm shifts.</li>
+    </ul>
+  </div>
+  <div class="note-card">
+    <h3>Option B — everything in A, plus</h3>
+    <ul>
+      <li><b>Pull-quote ticker.</b> Ten of the shortest real reviews, looping slowly. Every quote is verbatim — nothing truncated.</li>
+      <li><b>Why short ones only.</b> The three featured reviews stay full-length and readable; the ticker carries the <i>volume</i> signal that a 3-card grid can't.</li>
+      <li><b>Pauses on hover</b> and stops entirely for visitors with reduced-motion enabled.</li>
+      <li><b>Pure CSS keyframes.</b> No React or Framer Motion needed — the 410 site stays a zero-build static page.</li>
+      <li><b>Trade-off:</b> more movement on a page whose brand reads steady and dependable. Worth a look on mobile before committing.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Pull-quote ticker — real short reviews, duplicated once for a seamless loop.
+  const QUOTES = [
+    ["Darrin Sprouse","On time. Fair price. Great communication."],
+    ["Diane","Courteous, Professional, Friendly and Efficient. I'm definitely hiring again!"],
+    ["Carl Berger","Prompt, efficient, courteous, and value priced. Would use again!"],
+    ["Traci Baker","I would highly recommend 410 Odd Jobs! Very professional and reliable!"],
+    ["Mike Mercurio","Courteous and hard working! I've used them twice and will soon again."],
+    ["Doris Schuyler","Very friendly and accommodating. So easy to work with when planning."],
+    ["Karen McCormack","Very prompt, reliable and a pleasure to work with."],
+    ["Asheik Hussain","Ahmad and his team did a fantastic job!"],
+    ["Stacey Uebersax","Easy to schedule and a seamless pick up. Fantastic communication throughout."],
+    ["Mike","Excellent communication and customer service. I didn't have to lift a finger."]
+  ];
+  const G = '<svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+  const card = ([who, text]) =>
+    `<div class="chip"><div class="stars">★★★★★</div><q>${text}</q>
+     <span class="who">${G}<strong>${who}</strong></span></div>`;
+  document.getElementById('track').innerHTML = [...QUOTES, ...QUOTES].map(card).join('');
+
+  // Render each section on a 1280px desktop canvas and scale it down to fit its
+  // column. Once the column is wider than 1280 there is nothing to scale, so the
+  // canvas just fills it — otherwise full-size view leaves dead space on the right.
+  const board = document.getElementById('board');
+  function fit() {
+    document.querySelectorAll('.stage').forEach(stage => {
+      const canvas = stage.firstElementChild;
+      const roomy = stage.clientWidth >= 1280;
+      canvas.style.width = roomy ? '100%' : '1280px';
+      const s = roomy ? 1 : stage.clientWidth / 1280;
+      canvas.style.transform = `scale(${s})`;
+      stage.style.height = canvas.offsetHeight * s + 'px';
+    });
+  }
+  new ResizeObserver(fit).observe(document.body);
+  window.addEventListener('load', fit);
+
+  const bSide = document.getElementById('btn-side'), bStack = document.getElementById('btn-stack');
+  function setView(v) {
+    board.dataset.view = v;
+    bSide.setAttribute('aria-pressed', v === 'side');
+    bStack.setAttribute('aria-pressed', v === 'stack');
+    requestAnimationFrame(fit);
+  }
+  bSide.onclick = () => setView('side');
+  bStack.onclick = () => setView('stack');
+  fit();
+</script>
+</body>
+</html>
