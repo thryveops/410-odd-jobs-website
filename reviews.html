@@ -8,13 +8,54 @@
   
   <link rel="canonical" href="https://410oddjobs.com/reviews.html" />
 
+  <!-- Google Consent Mode v2 defaults. These must reach the dataLayer before
+       the gtag.js loader below, so the tag knows the consent state before it
+       fires anything — that is the whole point of a "default", and leaving it
+       unset is what Google's diagnostics flag.
+
+       EEA/UK/Switzerland default to denied: those visitors get cookieless
+       pings and no ad or analytics cookies, which is the safe state without a
+       consent banner. Everywhere else defaults to granted, which is how the
+       site has always behaved for US traffic — nothing changes for the
+       Maryland customers who are the actual audience.
+
+       If a consent banner is ever added, it calls gtag('consent', 'update', ...)
+       with the visitor's choices; these defaults stay as the starting point. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // EU 27 + Iceland/Liechtenstein/Norway (EEA) + United Kingdom + Switzerland.
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'region': ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR',
+                 'HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL',
+                 'PT','RO','SK','SI','ES','SE','GB','CH']
+    });
+
+    // Everywhere else, including the entire US service area.
+    gtag('consent', 'default', {
+      'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+      'ad_personalization': 'granted',
+      'analytics_storage': 'granted'
+    });
+
+    // Both only take effect where storage is denied, so they are no-ops for US
+    // traffic: redact ad click IDs from the pings, and carry the gclid in the
+    // URL instead of a cookie so conversions stay measurable without one.
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+  </script>
+
   <!-- Google tag (gtag.js) — one loader, two destinations: Google Ads
        conversion tracking and GA4 analytics. A product added later gets
        another gtag('config', ...) line here, never a second gtag/js tag. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18239637427"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-18239637427');
     gtag('config', 'G-EF7KCFC6J9');
