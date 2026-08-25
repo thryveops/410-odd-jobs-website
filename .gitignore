@@ -1,2 +1,9 @@
 # macOS
 .DS_Store
+
+# Full-resolution source photos. This repo is the live site, so anything
+# committed here is published at 410oddjobs.com — these originals are 61MB
+# and their compressed web versions already live in assets/images/. Kept on
+# disk (not deleted) because pending WebP/resize work needs to re-encode from
+# the originals rather than recompress the already-compressed copies.
+image 3.0/
