@@ -10,15 +10,16 @@ https://search.google.com/local/reviews?placeid=ChIJBfkPVNXE6AURgcKLg98SKTw
 Set the sort control to **Newest**. Note two things:
 
 - The **total review count**
-- The **top three reviews** — text, reviewer name, and the relative date
-  Google shows ("2 weeks ago")
+- The **top three reviews** — text and reviewer name. Note roughly when each
+  was left, but record it as a month ("August 2026"), not as Google's relative
+  wording ("2 weeks ago") — see step 3.
 
 ## 2. Update the count
 
 From the repo root:
 
 ```bash
-python3 scripts/update-review-count.py 52
+python3 scripts/update-review-count.py 59
 ```
 
 That updates all seven places the number appears across `index.html`,
@@ -26,7 +27,7 @@ That updates all seven places the number appears across `index.html`,
 nothing else would catch. Use `--dry-run` first if you want to see what it
 would touch.
 
-The homepage ticker label ("…and 47 more") is derived automatically as
+The homepage ticker label ("…and 56 more") is derived automatically as
 total minus the three featured. You don't set it separately.
 
 ## 3. Swap the three featured reviews
@@ -44,7 +45,7 @@ Three `.review-card` blocks follow, ending at
 |---|---|
 | Review text | inside `<p class="review-text">` |
 | Reviewer name | `<p class="reviewer-name">` |
-| Relative date | `<p class="reviewer-date">` — copy Google's wording verbatim |
+| Date | `<p class="reviewer-date">` — the current month and year, e.g. `August 2026` |
 | Avatar letter | `<div class="reviewer-avatar">` — first initial |
 
 **Short reviews:** if one is under roughly 15 words, change its class to
@@ -52,9 +53,15 @@ Three `.review-card` blocks follow, ending at
 reads as punchy rather than half empty. Remove `is-short` when a long review
 takes that slot again.
 
-**Never invent a date.** Copy exactly what Google shows. If the wording isn't
-available, leave the previous date out rather than guessing — a wrong date is
-a false claim to a customer.
+**Use the month and year, not Google's relative wording.** Write `August 2026`,
+not `2 days ago`. Relative dates are only true on the day you paste them, and
+this update does not reliably happen weekly — on 2026-08-25 the live site was
+still claiming "1 day ago" for reviews committed on 2026-08-17, overstating
+recency by more than a week. A month label cannot go stale between updates.
+
+**Never invent a date.** Only claim a month you actually saw on the listing. If
+you can't tell when a review was left, drop the `<p class="reviewer-date">`
+line rather than guessing — a wrong date is a false claim to a customer.
 
 ## 4. Check it
 
@@ -69,7 +76,7 @@ and pauses when you hover it.
 ## 5. Commit
 
 ```bash
-git add -A && git commit -m "Update reviews: 3 newest featured, count now 52" && git push
+git add -A && git commit -m "Update reviews: 3 newest featured, count now 59" && git push
 ```
 
 GitHub Pages redeploys automatically. Give it a minute, then check
@@ -83,21 +90,27 @@ GitHub Pages redeploys automatically. Give it a minute, then check
 that ever changes, the `5.0` in the trust bar is hardcoded in `index.html` —
 search for `class="num"`.
 
-**`reviews.html` is a curated archive, not a live mirror.** It currently holds
-46 review cards while Google reports more. The homepage trust bar quotes
-Google's real number, which is correct, but "See All 52 Reviews" pointing at a
-page with 46 is a discrepancy worth closing when you have time — paste the
-missing ones into `reviews.html` following the existing card markup.
+**`reviews.html` must hold one card per review Google reports.** As of
+2026-08-25 the two are in sync at 59, and `verify-content.py` now enforces it —
+the count in the copy is checked against the number of `.review-card` divs, so
+a mismatch fails the commit rather than shipping. When you add reviews, add the
+cards *and* run the count script; don't bump the number alone.
 
 **The ticker quotes rarely need touching.** They're short verbatim reviews in
 the `PULL_QUOTES` array near the bottom of `index.html`. A one-line quote
 doesn't go stale the way "our three most recent" does. Refresh them a couple
 of times a year, not weekly.
 
-**If the weekly cadence slips**, the relative dates ("2 weeks ago") become
-wrong before anything else does. If you know you'll be away, either update the
-dates to something that stays true ("June 2026") or drop the
-`<p class="reviewer-date">` lines until you're back.
+**If the weekly cadence slips**, nothing silently becomes false — that is the
+point of month-and-year dates. What does drift is the count, since new reviews
+land whether or not you update. Run the count script every time you touch this,
+even if you're not swapping the featured three.
+
+**Normalize two things, never the wording.** Google shows some reviewer names in
+full caps ("MEGAN ARTHUR") — title-case those so they don't read as shouting
+next to every other name. And collapse any hard line break inside a review body
+to a single space; no card in the archive uses `<br>`. The review text itself
+stays verbatim, typos and emoji included.
 
 ## Automating this later
 
