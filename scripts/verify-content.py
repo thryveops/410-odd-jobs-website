@@ -14,6 +14,7 @@ Exit:   0 = clean, 1 = problems found
 """
 
 import hashlib
+import json
 import os
 import re
 import sys
@@ -143,6 +144,31 @@ def check_reviews(index_html, reviews_html):
             f"homepage ticker says {rest.group(1)} more, but {total} total "
             f"minus {featured} featured is {total - featured}"
         )
+
+    # The LocalBusiness aggregateRating on the homepage states the count in
+    # JSON-LD, where none of the patterns above can see it. A schema that
+    # disagrees with the page is a claim to Google that contradicts the claim
+    # to the customer, so hold it to the same standard as the visible copy.
+    schema = re.search(r'<script type="application/ld\+json">(.*?)</script>', index_html, re.S)
+    if not schema:
+        fail("index.html: LocalBusiness JSON-LD block is missing")
+    else:
+        try:
+            data = json.loads(schema.group(1))
+        except json.JSONDecodeError as exc:
+            fail(f"index.html: LocalBusiness JSON-LD does not parse ({exc})")
+        else:
+            rating = data.get("aggregateRating", {})
+            stated = rating.get("reviewCount")
+            if stated is None:
+                fail("LocalBusiness schema has no aggregateRating.reviewCount")
+            elif int(stated) != total:
+                fail(
+                    f"schema aggregateRating.reviewCount is {stated} but "
+                    f"{total} review cards exist"
+                )
+            else:
+                notes.append(f"schema aggregateRating: {total} reviews, {rating.get('ratingValue')} stars")
 
     stale = re.findall(r"\b(\d{2})\+? (?:verified )?[Rr]eviews\b", reviews_html)
     for n in set(stale):

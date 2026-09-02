@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Update the Google review count everywhere it appears on the site.
 
-The count lives in five places across three pages, including a meta
-description that no amount of JavaScript could reach. Rather than injecting
-it at runtime — which would hide the number from crawlers on a site whose
-whole point is local SEO — the number stays hardcoded in the HTML and this
-script keeps the copies in sync.
+The count lives in several places across three pages — including a meta
+description and a JSON-LD aggregateRating, neither of which JavaScript could
+reach. Rather than injecting it at runtime — which would hide the number from
+crawlers on a site whose whole point is local SEO — the number stays hardcoded
+in the HTML and this script keeps the copies in sync.
 
     python3 scripts/update-review-count.py 52
     python3 scripts/update-review-count.py 52 --dry-run
@@ -34,6 +34,12 @@ TAGGED_REST = re.compile(r'(<([a-z]+)[^>]*\bdata-review-count-rest\b[^>]*>)(\s*)
 # explicit pattern. If the wording is ever rewritten, update this too.
 UNTAGGED = [
     (pathlib.Path("reviews.html"), re.compile(r'(Read )(\d+)( verified 5-star reviews)')),
+    # The LocalBusiness aggregateRating in index.html. JSON-LD can't carry an
+    # HTML attribute, so the schema count needs an explicit pattern the same
+    # way the meta description does. verify-content.py cross-checks it against
+    # the real card count, so a miss here fails the commit rather than
+    # shipping a schema that contradicts the page.
+    (pathlib.Path("index.html"), re.compile(r'("reviewCount":\s*)(\d+)(,)')),
 ]
 
 FILES = ["index.html", "reviews.html", "quote/index.html"]

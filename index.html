@@ -110,13 +110,37 @@
   <meta name="twitter:description" content="Howard County's reliable junk removal, moving & hauling service." />
   <meta name="twitter:image" content="https://410oddjobs.com/assets/images/favicon-512.png" />
 
-  <!-- Schema.org Markup -->
+  <!-- Schema.org Markup — LocalBusiness.
+
+       Deliberately NOT typed as MovingCompany even though we do local moves.
+       Junk removal is the primary business, schema.org has no type for it,
+       and narrowing the type would skew entity understanding toward the
+       smaller half of the work. The services are stated precisely in
+       hasOfferCatalog instead, junk removal first.
+
+       aggregateRating is here as an entity signal, NOT to win star snippets.
+       Google's self-serving review policy makes a LocalBusiness page
+       ineligible for review rich results when it marks up reviews about
+       itself — exactly this case:
+       https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful
+       It costs nothing and it is true, so it stays. Do not promise anyone
+       stars in Search on the strength of it.
+
+       reviewCount is kept in sync by scripts/update-review-count.py and
+       cross-checked against the real card count by scripts/verify-content.py,
+       so it cannot silently drift the way a hand-edited number would.
+
+       No FAQPage block accompanies this. Google restricted FAQ rich results
+       to government and health sites in Sept 2023 and removed the feature
+       entirely in May 2026, so marking up the FAQ would be decoration. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "410 Odd Jobs LLC",
+    "description": "Owner-led junk removal, moving and hauling in Howard County, Maryland. Furniture and appliance removal, estate and storage cleanouts, yard waste and construction debris.",
     "image": "https://410oddjobs.com/assets/images/logo.png",
+    "logo": "https://410oddjobs.com/assets/images/logo.png",
     "@id": "https://410oddjobs.com",
     "url": "https://410oddjobs.com",
     "telephone": "+14435186074",
@@ -145,9 +169,66 @@
       "opens": "08:00",
       "closes": "18:00"
     },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Howard County, Maryland" },
+      { "@type": "City", "name": "Ellicott City" },
+      { "@type": "City", "name": "Columbia" },
+      { "@type": "City", "name": "Clarksville" },
+      { "@type": "City", "name": "Marriottsville" },
+      { "@type": "City", "name": "Woodstock" },
+      { "@type": "City", "name": "Fulton" },
+      { "@type": "City", "name": "Jessup" },
+      { "@type": "City", "name": "Savage" },
+      { "@type": "City", "name": "Laurel" },
+      { "@type": "City", "name": "North Laurel" },
+      { "@type": "City", "name": "Elkridge" },
+      { "@type": "City", "name": "Dayton" },
+      { "@type": "City", "name": "Glenwood" },
+      { "@type": "City", "name": "Glenelg" },
+      { "@type": "City", "name": "Highland" },
+      { "@type": "City", "name": "West Friendship" }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "410 Odd Jobs Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Junk Removal",
+            "description": "We load, haul, and responsibly dispose of unwanted items — furniture, appliances, yard waste, construction materials, electronics and scrap metal, plus attic, basement, garage and shed clearances."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Moving & Hauling",
+            "description": "Local residential moves, single item transport, furniture delivery and heavy item handling with flexible scheduling."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Estate Cleanouts",
+            "description": "Full property and estate clears, storage unit cleanouts, hoarding situations and property management turnovers, with responsible disposal."
+          }
+        }
+      ]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "reviewCount": 62,
+      "ratingValue": "5.0",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "sameAs": [
       "https://www.facebook.com/people/410-Odd-Jobs-LLC/61577842138356/",
-      "https://www.instagram.com/410oddjobs/"
+      "https://www.instagram.com/410oddjobs/",
+      "https://www.google.com/maps/place/?q=place_id:ChIJBfkPVNXE6AURgcKLg98SKTw"
     ]
   }
   </script>
@@ -1861,7 +1942,7 @@
             <span class="num">5.0</span>
             <span class="trust-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
           </div>
-          <p class="trust-meta"><span data-review-count>59</span> Reviews · Howard County, MD</p>
+          <p class="trust-meta"><span data-review-count>62</span> Reviews · Howard County, MD</p>
         </div>
       </div>
     </div>
@@ -1884,12 +1965,12 @@
             Verified
           </span>
         </div>
-        <p class="review-text">Ahmad and his team were miracle workers. They loaded the furniture quickly and efficiently and then made three separate stops over multiple counties to deliver the items to my three sons. The team showed up on time and was friendly, cheerful and very industrious. I am grateful my sister-in-law recommended the company to me. Thank you again, Ahmad!</p>
+        <p class="review-text">So responsive and professional. We needed help today to remove several items and they worked us into their schedule and were done by the afternoon!!! Thanks guys!!! Going to use them again and again!!!! Highly recommend!!!</p>
         <div class="reviewer">
-          <div class="reviewer-avatar">M</div>
+          <div class="reviewer-avatar">A</div>
           <div>
-            <p class="reviewer-name">Megan Arthur</p>
-            <p class="reviewer-date">August 2026</p>
+            <p class="reviewer-name">Anastasia Brown</p>
+            <p class="reviewer-date">September 2026</p>
           </div>
         </div>
       </div>
@@ -1901,11 +1982,11 @@
             Verified
           </span>
         </div>
-        <p class="review-text">I highly recommend this team! I was pleased with their efficiency and the care they took removing the items from my basement! Will absolutely use them again!!</p>
+        <p class="review-text">Very fast and courteous service! So grateful for the quick help and smooth transaction! I will definitely call on you guys again!❤️</p>
         <div class="reviewer">
-          <div class="reviewer-avatar">Y</div>
+          <div class="reviewer-avatar">A</div>
           <div>
-            <p class="reviewer-name">Yvonne Hopwood</p>
+            <p class="reviewer-name">Amy Thompson</p>
             <p class="reviewer-date">August 2026</p>
           </div>
         </div>
@@ -1918,11 +1999,11 @@
             Verified
           </span>
         </div>
-        <p class="review-text">Made a call around 1030 AM to schedule a pickup and Ahmad came at 1 and 30min later… done… highly recommend.</p>
+        <p class="review-text">410 Odd Jobs picked up a very heavy piece of furniture that we needed disposed of on very short notice. They were incredibly communicative, prompt and took care and consideration for what they were moving. We will absolutely use they for all our future needs. Fantastic experience!</p>
         <div class="reviewer">
-          <div class="reviewer-avatar">V</div>
+          <div class="reviewer-avatar">A</div>
           <div>
-            <p class="reviewer-name">Victoria Kircher</p>
+            <p class="reviewer-name">Amy Letts</p>
             <p class="reviewer-date">August 2026</p>
           </div>
         </div>
@@ -1933,7 +2014,7 @@
     <!-- "rest" = total minus the three featured above. Derived by
          scripts/update-review-count.py so there is still only one number
          to change each week. -->
-    <p class="ticker-label">…and <span data-review-count-rest>56</span> more</p>
+    <p class="ticker-label">…and <span data-review-count-rest>59</span> more</p>
   </div>
 
   <!-- Pull-quote ticker. Short verbatim reviews only — long ones stay in the
@@ -1946,7 +2027,7 @@
 
   <div class="container">
     <div class="reviews-cta reveal">
-      <a href="reviews.html" class="btn btn-outline btn-lg">See All <span data-review-count>59</span> Reviews →</a>
+      <a href="reviews.html" class="btn btn-outline btn-lg">See All <span data-review-count>62</span> Reviews →</a>
       <a href="https://search.google.com/local/writereview?placeid=ChIJBfkPVNXE6AURgcKLg98SKTw&source=g.page.m.ia._&utm_source=gbp&laa=nmx-review-solicitation-ia2" target="_blank" rel="noopener" class="btn btn-google">
         <img src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png" alt="" width="18">
         Write a Review

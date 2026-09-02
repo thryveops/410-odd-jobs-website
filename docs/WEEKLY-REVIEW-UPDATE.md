@@ -22,10 +22,10 @@ From the repo root:
 python3 scripts/update-review-count.py 59
 ```
 
-That updates all seven places the number appears across `index.html`,
-`reviews.html`, and `quote/index.html` — including a meta description that
-nothing else would catch. Use `--dry-run` first if you want to see what it
-would touch.
+That updates all eight places the number appears across `index.html`,
+`reviews.html`, and `quote/index.html` — including a meta description and the
+JSON-LD `aggregateRating`, neither of which anything else would catch. Use
+`--dry-run` first if you want to see what it would touch.
 
 The homepage ticker label ("…and 56 more") is derived automatically as
 total minus the three featured. You don't set it separately.
@@ -95,6 +95,15 @@ search for `class="num"`.
 the count in the copy is checked against the number of `.review-card` divs, so
 a mismatch fails the commit rather than shipping. When you add reviews, add the
 cards *and* run the count script; don't bump the number alone.
+
+**The homepage schema states the count too.** `index.html` carries a
+`LocalBusiness` block with an `aggregateRating`, and the count script keeps its
+`reviewCount` in sync automatically — `verify-content.py` fails the commit if it
+ever disagrees with the real card count. You don't edit it by hand. Note that
+this markup will *not* produce star ratings in Google Search: a business that
+marks up reviews about itself is ineligible for review rich results under
+Google's self-serving review policy. It's there as an entity signal, and it's
+true. Don't promise the client stars on the strength of it.
 
 **The ticker quotes rarely need touching.** They're short verbatim reviews in
 the `PULL_QUOTES` array near the bottom of `index.html`. A one-line quote
