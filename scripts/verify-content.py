@@ -91,7 +91,7 @@ def check_reviews(index_html, reviews_html):
 
     # Duplicate reviewers are allowed only on an explicit allowlist, because a
     # repeat customer is legitimate but an accidental copy-paste is not.
-    allowed_repeats = {"Wade Kerns"}
+    allowed_repeats = {"Wade Kerns", "Denise Gibson"}
     repeats = {n for n, c in Counter(c["name"] for c in cards).items() if c > 1}
     for name in sorted(repeats - allowed_repeats):
         fail(f"duplicate reviewer {name!r} not on the allowlist")
