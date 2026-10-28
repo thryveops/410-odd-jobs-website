@@ -42,7 +42,7 @@ UNTAGGED = [
     (pathlib.Path("index.html"), re.compile(r'("reviewCount":\s*)(\d+)(,)')),
 ]
 
-FILES = ["index.html", "reviews.html", "quote/index.html"]
+FILES = ["index.html", "reviews.html", "quote/index.html", "junk-removal/index.html"]
 
 
 def main():

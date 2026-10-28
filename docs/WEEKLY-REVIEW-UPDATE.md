@@ -22,8 +22,8 @@ From the repo root:
 python3 scripts/update-review-count.py 59
 ```
 
-That updates all eight places the number appears across `index.html`,
-`reviews.html`, and `quote/index.html` — including a meta description and the
+That updates all ten places the number appears across `index.html`,
+`reviews.html`, `quote/index.html`, and `junk-removal/index.html` — including a meta description and the
 JSON-LD `aggregateRating`, neither of which anything else would catch. Use
 `--dry-run` first if you want to see what it would touch.
 

@@ -24,6 +24,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX = os.path.join(ROOT, "index.html")
 REVIEWS = os.path.join(ROOT, "reviews.html")
 QUOTE = os.path.join(ROOT, "quote", "index.html")
+JUNK = os.path.join(ROOT, "junk-removal", "index.html")
 IMAGES = os.path.join(ROOT, "assets", "images")
 
 PLATFORM_LOCATION = {
@@ -126,6 +127,10 @@ def check_reviews(index_html, reviews_html):
         # The Google Ads landing page repeats the count in its trust bar, so it
         # drifts out of sync the same way the others do.
         (QUOTE, rf"{total} verified reviews", "ads landing page trust bar"),
+        # The junk removal ads page states it twice (hero trust bar and the
+        # mid-page trust strip). Both are data-review-count tagged, so
+        # update-review-count.py rewrites them together.
+        (JUNK, rf"{total} verified reviews", "junk removal page trust bar"),
         # Homepage trust bar, above the three featured reviews.
         (INDEX, rf"{total} Reviews · Howard County", "homepage trust bar"),
     ]
